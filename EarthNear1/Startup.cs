@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EarthNear1.Interfaces;
 using EarthNear1.Services.ShiftServices;
+using EarthNear1.Services.UserServices;
 
 namespace EarthNear1
 {
@@ -28,6 +29,8 @@ namespace EarthNear1
             services.AddRazorPages();
             services.AddSingleton<IShiftService, ShiftService>();
             services.AddTransient<ADO_ShiftService>();
+            services.AddSingleton<IUserService, UserService>();
+            services.AddTransient<ADO_UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
