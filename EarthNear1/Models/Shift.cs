@@ -7,6 +7,7 @@ namespace EarthNear1.Models
 {
     public class Shift
     {
+        public int ShiftId { get; set; }
         public string Description { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }

@@ -10,12 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
     <Folder Include="Pages\Admin\" />
     <Folder Include="Pages\Bookings\" />
-    <Folder Include="Pages\Shifts\" />
     <Folder Include="Pages\Users\Log\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
