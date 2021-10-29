@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\" />
-    <Folder Include="Exceptions\" />
     <Folder Include="Pages\Admin\" />
     <Folder Include="Pages\Bookings\" />
     <Folder Include="Pages\Shifts\" />
