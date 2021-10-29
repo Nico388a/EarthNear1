@@ -1,0 +1,17 @@
+﻿CREATE TABLE [dbo].[Users] (
+[UserId] INT IDENTITY (1, 1) NOT NULL,
+[Name] NVARCHAR (50) NOT NULL,
+[AfterName] NVARCHAR (50) NOT NULL,
+[PhoneNumber] NVARCHAR (50) NOT NUll,
+[Email] NVARCHAR (50) NOT NULL,
+[Password] NVARCHAR (20) NOT NULL,
+PRIMARY KEY CLUSTERED ([UserId] ASC)
+);
+
+CREATE TABLE [dbo].[Shifts] (
+[ShiftId] INT IDENTITY (1, 1) NOT NULL,
+[DateFrom] DATETIME NOT NULL,
+[DateTo] DATETIME NOT NULL,
+[Description] NVARCHAR (50),
+PRIMARY KEY CLUSTERED ([ShiftId] ASC)
+);

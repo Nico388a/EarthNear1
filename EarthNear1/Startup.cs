@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EarthNear1.Interfaces;
+using EarthNear1.Services.ShiftServices;
 
 namespace EarthNear1
 {
@@ -24,6 +26,8 @@ namespace EarthNear1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddSingleton<IShiftService, ShiftService>();
+            services.AddTransient<ADO_ShiftService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
