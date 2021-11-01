@@ -1,0 +1,28 @@
+﻿@page
+@model EarthNear1.Pages.Shifts.CreateShiftModel
+@{
+    ViewData["Title"] = "CreateShift";
+}
+<h1>Lav vagttider</h1>
+
+<form method="post" class="container-fluid">
+    <div class="form-group">
+        <label asp-for="@Model.Shift.DateFrom" class="control-label">Vagt fra</label>
+        <input asp-for="@Model.Shift.DateFrom" class="form-control"/>
+        <span asp-validation-for="@Model.Shift.DateFrom" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Shift.DateTo" class="control-label">Vagt til</label>
+        <input asp-for="@Model.Shift.DateTo" class="form-control"/>
+        <span asp-validation-for="@Model.Shift.DateTo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Shift.Description" class="control-label">Dag/Aftenvagt</label>
+        <input asp-for="@Model.Shift.Description" class="form-control"/>
+        <span asp-validation-for="@Model.Shift.Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Opret Vagtplan" class="btn btn-primary"/>
+    </div>
+</form>

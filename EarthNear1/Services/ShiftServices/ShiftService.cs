@@ -22,9 +22,9 @@ namespace EarthNear1.Services.ShiftServices
             return await shiftService.GetAllShiftsAsync();
         }
 
-        public Task AddShiftAsync(Shift shift)
+        public async Task AddShiftAsync(Shift shift)
         {
-            throw new NotImplementedException();
+          await shiftService.CreateShiftAsync(shift);
         }
 
         public Task<Shift> GetShiftByIdAsync(int id)

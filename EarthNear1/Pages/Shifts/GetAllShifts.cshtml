@@ -5,6 +5,9 @@
 }
 <h1>VagtTider</h1>
 
+<p>
+    <a asp-page="/Shifts/CreateShift"><strong>Ny vagt+</strong></a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -12,10 +15,13 @@
                 Vagt Id
             </th>
             <th>
-                Vagt fra
+                Tirsdag
             </th>
             <th>
-                Vagt til
+                Torsdag
+            </th>
+            <th>
+                Fredag
             </th>
             <th>
                 Vagt på døgnet
@@ -23,23 +29,36 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.Shifts)
+    @if (Model.Shifts.Count() != 0)
     {
-        <tr>
-            <td>
-                @item.ShiftId
-            </td>
-            <td>
-                @item.DateFrom
-            </td>
-            <td>
-                @item.DateTo
-            </td>
-            <td>
-                @item.Description
-            </td>
+        @foreach (var item in Model.Shifts)
+        {
+            <tr>
+                
+                <td>
+                    @item.ShiftId
+                </td>
 
-        </tr>
+                <td>
+                    @item.DateFrom
+                    @item.DateTo
+                </td>
+                <td>
+                    @item.DateFrom
+                    @item.DateTo
+                </td>
+
+                <td>
+                    @item.DateFrom
+                    @item.DateTo
+                </td>
+
+                <td>
+                    @item.Description
+                </td>
+
+            </tr>
+        }
     }
     </tbody>
 </table>

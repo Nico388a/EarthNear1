@@ -44,5 +44,23 @@ namespace EarthNear1.Services.ShiftServices
 
             return shifts;
         }
+
+        public async Task CreateShiftAsync(Shift shift)
+        {
+            string sql = $"Insert Into Shifts(DateFrom, DateTo, Description) Values(@DateFrom, @DateTo, @Description)";
+            await using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    await command.Connection.OpenAsync();
+                    command.Parameters.AddWithValue("@DateFrom", shift.DateFrom);
+                        command.Parameters.AddWithValue("@DateTo", shift.DateTo);
+                        command.Parameters.AddWithValue("@Description", shift.Description);
+                        int affectedRows = await command.ExecuteNonQueryAsync();
+                        
+                }
+            }
+
+        }
     }
 }
