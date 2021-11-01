@@ -3,3 +3,63 @@
 @{
     ViewData["Title"] = "GetAllUsers";
 }
+<h1>Medlemmer</h1>
+
+<form method="post">
+    <p>
+        <a asp-page="Create" class="btn btn-primary">tilføj nyt medlem</a>
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                MedlemsId
+            </th>
+            <th>
+                Navn
+            </th>
+            <th>
+                EfterNavn
+            </th>
+            <th>
+                Nummer
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Kodeord
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Users.Count() != 0)
+        {
+            @foreach (var item in Model.Users)
+            {
+                <tr>
+                    <td>
+                        @item.UserId
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.AfterName
+                    </td>
+                    <td>
+                        @item.PhoneNumber
+                    </td>
+                    <td>
+                        @item.Email
+                    </td>
+                    <td>
+                        @item.Password
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

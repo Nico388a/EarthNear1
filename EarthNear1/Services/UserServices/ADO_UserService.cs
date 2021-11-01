@@ -22,7 +22,7 @@ namespace EarthNear1.Services.UserServices
         }
         public async Task<List<User>> GetAllUsersAsync()
         {
-            string sql = "Select * From User";
+            string sql = "Select * From Users";
             await using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 await using (SqlCommand command = new SqlCommand(sql, connection))
@@ -38,10 +38,57 @@ namespace EarthNear1.Services.UserServices
                         user.PhoneNumber = Convert.ToString(dataReader["PhoneNumber"]);
                         user.Email = Convert.ToString(dataReader["Email"]);
                         user.Password = Convert.ToString(dataReader["Password"]);
+                        users.Add(@user);
                     }
                 }
             }
             return users;
+        }
+        public async Task<User> GetUserFormIdAsync(int id)
+        {
+            User @user = new User();
+            string sql = $"Select * From Users Where UserId = @id";
+            await using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await using (SqlCommand command=new SqlCommand(sql, connection))
+                {
+                    await command.Connection.OpenAsync();
+                    command.Parameters.AddWithValue("@id", id);
+                    SqlDataReader dataReader = await command.ExecuteReaderAsync();
+                    if (dataReader.Read())
+                    {
+                        @user.UserId = Convert.ToInt32(dataReader["UserId"]);
+                        @user.Name = Convert.ToString(dataReader["Name"]);
+                        @user.AfterName = Convert.ToString(dataReader["AfterName"]);
+                        @user.PhoneNumber = Convert.ToString(dataReader["PhoneNumber"]);
+                        @user.Email = Convert.ToString(dataReader["Email"]);
+                        @user.Password = Convert.ToString(dataReader["Password"]);
+                    }
+                }
+            }
+                return @user;
+        }
+        public async Task CreateUserAsync(User user)
+        {
+            string sql = $"Insert Into Users(Name, AfterName, PhoneNumber, Email, Password) Values(@Name, @AfterName, @PhoneNumber, @Email, @Password)";
+            await using(SqlConnection connection= new SqlConnection(connectionString))
+            {
+                await using(SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Name", user.Name);
+                    command.Parameters.AddWithValue("@AfterName", user.AfterName);
+                    command.Parameters.AddWithValue("@PhoneNumber", user.PhoneNumber);
+                    command.Parameters.AddWithValue("@Email", user.Email);
+                    command.Parameters.AddWithValue("@Password", user.Password);
+                    await command.Connection.OpenAsync();
+                    int affectedRows = await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
+        public async Task<User> DeleteUserAsync(User user)
+        {
+
+            return user;
         }
     }
 }

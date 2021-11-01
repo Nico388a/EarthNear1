@@ -9,6 +9,10 @@ namespace EarthNear1.Interfaces
     public interface IUserService
     {
         Task<IEnumerable<User>> GetAllUsersAsync();
+        Task AddUserAsync(User user);
+        Task DeleteUserAsync(User user);
+        Task<User> GetUserFromIdAsync(int id);
+        Task UpdateUserAsync(User user);
 
     }
 }

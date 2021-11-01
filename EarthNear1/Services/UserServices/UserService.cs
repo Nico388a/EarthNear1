@@ -19,5 +19,25 @@ namespace EarthNear1.Services.UserServices
         {
             return await userService.GetAllUsersAsync();
         }
+
+        public async Task AddUserAsync(User user)
+        {
+            await userService.CreateUserAsync(user);
+        }
+
+        public Task DeleteUserAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<User> GetUserFromIdAsync(int id)
+        {
+            return await userService.GetUserFormIdAsync(id);
+        }
+
+        public Task UpdateUserAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
