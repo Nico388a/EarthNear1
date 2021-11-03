@@ -25,9 +25,9 @@ namespace EarthNear1.Services.UserServices
             await userService.CreateUserAsync(user);
         }
 
-        public Task DeleteUserAsync(User user)
+        public async Task DeleteUserAsync(User user)
         {
-            throw new NotImplementedException();
+            await userService.DeleteUserAsync(user);
         }
 
         public async Task<User> GetUserFromIdAsync(int id)
@@ -35,9 +35,14 @@ namespace EarthNear1.Services.UserServices
             return await userService.GetUserFormIdAsync(id);
         }
 
-        public Task UpdateUserAsync(User user)
+        public async Task UpdateUserAsync(User user)
         {
-            throw new NotImplementedException();
+            await userService.UpdateUserAsync(user);
+        }
+
+        public async Task<IEnumerable<User>> GetUserByNameAsync(string name)
+        {
+            return await userService.GetUserByNameAsync(name);
         }
     }
 }

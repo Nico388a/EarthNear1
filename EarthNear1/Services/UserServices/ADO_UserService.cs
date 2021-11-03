@@ -44,6 +44,31 @@ namespace EarthNear1.Services.UserServices
             }
             return users;
         }
+        public async Task<List<User>> GetUserByNameAsync(string name)
+        {
+            string sql = $"Select * From Users Where Name LIKE'" + @name + "%" + "'";
+            await using(SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await using(SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    await command.Connection.OpenAsync();
+                    command.Parameters.AddWithValue("@name", name);
+                    SqlDataReader dataReader = await command.ExecuteReaderAsync();
+                    while (await dataReader.ReadAsync())
+                    {
+                        User @user = new User();
+                        @user.UserId = Convert.ToInt32(dataReader["UserId"]);
+                        @user.Name = Convert.ToString(dataReader["Name"]);
+                        @user.AfterName = Convert.ToString(dataReader["AfterName"]);
+                        @user.Email = Convert.ToString(dataReader["Email"]);
+                        @user.PhoneNumber = Convert.ToString(dataReader["PhoneNumber"]);
+                        @user.Password = Convert.ToString(dataReader["Password"]);
+                        users.Add(@user);
+                    }
+                }
+            }
+            return users;
+        }
         public async Task<User> GetUserFormIdAsync(int id)
         {
             User @user = new User();
@@ -85,9 +110,37 @@ namespace EarthNear1.Services.UserServices
                 }
             }
         }
+        public async Task<User> UpdateUserAsync(User user)
+        {
+            string sql = $"Update Users Set Name=@Name, AfterName=@AfterName, PhoneNumber=@PhoneNumber, Email=@Email, Password=@Password Where UserId=@id";
+            await using (SqlConnection connection=new SqlConnection(connectionString))
+            {
+                await using(SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    await command.Connection.OpenAsync();
+                    command.Parameters.AddWithValue("@id", user.UserId);
+                    command.Parameters.AddWithValue("@Name", user.Name);
+                    command.Parameters.AddWithValue("AfterName", user.AfterName);
+                    command.Parameters.AddWithValue("PhoneNumber", user.PhoneNumber);
+                    command.Parameters.AddWithValue("Email", user.Email);
+                    command.Parameters.AddWithValue("Password", user.Password);
+                    int affectedRows = await command.ExecuteNonQueryAsync();
+                }
+            }
+            return user;
+        }
         public async Task<User> DeleteUserAsync(User user)
         {
-
+            string sql = $"Delete From Users Where UserId=@id";
+            await using (SqlConnection connection= new SqlConnection(connectionString))
+            {
+                await using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    await command.Connection.OpenAsync();
+                    command.Parameters.AddWithValue("@id", user.UserId);
+                    int affectedRows = await command.ExecuteNonQueryAsync();
+                }
+            }
             return user;
         }
     }

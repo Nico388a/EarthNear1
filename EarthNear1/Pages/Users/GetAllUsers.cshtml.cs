@@ -11,6 +11,7 @@ namespace EarthNear1.Pages.Users
 {
     public class GetAllUsersModel : PageModel
     {
+        [BindProperty(SupportsGet = true)]
         public string FilterCriteria { get; set; }
         public IEnumerable<User> Users { get; private set; }
         private IUserService userService { get; set; }
@@ -20,7 +21,12 @@ namespace EarthNear1.Pages.Users
         }
         public async Task OnGetAsync()
         {
-            Users = await userService.GetAllUsersAsync();
+            if (!String.IsNullOrEmpty(FilterCriteria))
+            {
+                Users = await userService.GetUserByNameAsync(FilterCriteria);
+            }
+            else
+                Users = await userService.GetAllUsersAsync();
         }
     }
 }

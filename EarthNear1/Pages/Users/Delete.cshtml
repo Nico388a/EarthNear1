@@ -1,0 +1,39 @@
+﻿@page
+@model EarthNear1.Pages.Users.DeleteModel
+@{
+    ViewData["Title"] = "Slet arbejder";
+}
+
+<h1>Slet arbejder</h1>
+
+<form method="post">
+    <hr />
+    <dl class="row">
+        <dd class="form-group">
+            <label asp-for="@Model.User.UserId" class="control-label"></label>
+            <input asp-for="@Model.User.UserId" readonly="readonly" class="form-control" />
+        </dd>
+        <dd class="form-group">
+            <label asp-for="@Model.User.Name" class="control-label"></label>
+            <input asp-for="@Model.User.Name" readonly="readonly" class="form-control" />
+        </dd>
+        <dd class="form-group">
+            <label asp-for="@Model.User.AfterName" class="control-label"></label>
+            <input asp-for="@Model.User.AfterName" readonly="readonly" class="form-control" />
+        </dd>
+        <dd class="form-group">
+            <label asp-for="@Model.User.PhoneNumber" class="control-label"></label>
+            <input asp-for="@Model.User.PhoneNumber" readonly="readonly" class="form-control" />
+        </dd>
+        <dd class="form-group">
+            <label asp-for="@Model.User.Email" class="control-label"></label>
+            <input asp-for="@Model.User.Email" readonly="readonly" class="form-control" />
+        </dd>
+        <dd class="form-group">
+            <label asp-for="@Model.User.Password" class="control-label"></label>
+            <input asp-for="@Model.User.Password" readonly="readonly" class="form-control" />
+        </dd>
+    </dl>
+    <input type="submit" value="Delete" class="btn btn-danger"/>
+    <a asp-page="GetAllUsers">Afbryd</a>
+</form>
