@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using EarthNear1.Interfaces;
 using EarthNear1.Services.ShiftServices;
 using EarthNear1.Services.UserServices;
+using EarthNear1.Services;
 
 namespace EarthNear1
 {
@@ -27,6 +28,7 @@ namespace EarthNear1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddSingleton<LogInService>();
             services.AddTransient<IShiftService, ShiftService>();
             services.AddTransient<ADO_ShiftService>();
             services.AddTransient<IUserService, UserService>();
