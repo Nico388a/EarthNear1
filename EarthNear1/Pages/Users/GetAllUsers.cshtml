@@ -19,22 +19,13 @@
     <thead>
         <tr>
             <th>
-                MedlemsId
-            </th>
-            <th>
                 Navn
-            </th>
-            <th>
-                EfterNavn
             </th>
             <th>
                 Nummer
             </th>
             <th>
                 Email
-            </th>
-            <th>
-                Kodeord
             </th>
         </tr>
     </thead>
@@ -45,12 +36,7 @@
             {
         <tr>
             <td>
-                @item.UserId
-            </td>
-            <td>
                 @item.Name
-            </td>
-            <td>
                 @item.AfterName
             </td>
             <td>
@@ -59,10 +45,7 @@
             <td>
                 @item.Email
             </td>
-            <td>
-                @item.Password
-            </td>
-            <td>
+            @*<td>
                 <p>
                     <a asp-page="/Users/Update" asp-route-id="@item.UserId">Updater</a>
                 </p>
@@ -71,7 +54,7 @@
                 <p>
                     <a asp-page="/Users/Delete" asp-route-id="@item.UserId">Slet</a>
                 </p>
-            </td>
+            </td>*@
         </tr>
             }
         }
