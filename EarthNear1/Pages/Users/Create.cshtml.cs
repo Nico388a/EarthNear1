@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using EarthNear1.Exceptions;
 using EarthNear1.Models;
 using EarthNear1.Interfaces;
+using System.Text;
 
 namespace EarthNear1.Pages.Users
 {
@@ -25,7 +26,19 @@ namespace EarthNear1.Pages.Users
         public async Task OnGetAsync()
         {
             InfoText = "Enter new user";
+            RndPass = ChangePassword(5);
             Users = await userService.GetAllUsersAsync();
+        }
+        public string ChangePassword(int length)
+        {
+            const string valid = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ1234567890";
+            StringBuilder bld = new StringBuilder();
+            Random rnd = new Random();
+            while(0< length--)
+            {
+                bld.Append(valid[rnd.Next(valid.Length)]);
+            }
+            return bld.ToString();
         }
         public async Task<IActionResult> OnPostAsync(User user)
         {

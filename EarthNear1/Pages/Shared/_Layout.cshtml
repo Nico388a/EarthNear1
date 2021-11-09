@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using EarthNear1.Services;
+@inject LogInService LogInService
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -21,13 +23,39 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Shifts/GetAllShifts">Vagttider</a>
                         </li>
+                        @if (LogInService.GetLoggedUser() != null)
+            {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Users/GetAllUsers">Medlemmer</a>
+                    </li>
+            }
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                        </li>
+
+                        <li class="ml-auto">
+                            <div class="container-fluid">
+                                @{ if (LogInService.GetLoggedUser() != null)
+                                    {
+                                        <a asp-page="/Users/Log/LogOut" class="float-right" style="font-size: medium">Log Out</a>
+                                        <p class="float-right" style="font-size: medium">&nbsp; | &nbsp;</p>
+                                        <div class="float-right">
+                                            <a asp-page="/Users/Profile" asp-route-id="@LogInService.GetLoggedUser().UserId" class="float-right" style="font-size: medium">
+                                                @LogInService.GetLoggedUser().Name
+                                            </a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <a asp-page="/Users/Log/LogIn" class="float-right" style="font-size: medium">Log In</a>
+                                    }
+                                }
+                            </div>
                         </li>
                     </ul>
                 </div>

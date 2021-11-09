@@ -5,9 +5,13 @@
 }
 <h1>Medlemmer</h1>
 
-<form method="post">
+<p>
+    <a asp-page="Create" class="btn btn-primary">tilføj nyt medlem</a>
+</p>
+<form>
     <p>
-        <a asp-page="Create" class="btn btn-primary">tilføj nyt medlem</a>
+        <input type="text" asp-for="FilterCriteria"/>
+        <input type="submit" value="Filter"/>
     </p>
 </form>
 
@@ -15,22 +19,13 @@
     <thead>
         <tr>
             <th>
-                MedlemsId
-            </th>
-            <th>
                 Navn
-            </th>
-            <th>
-                EfterNavn
             </th>
             <th>
                 Nummer
             </th>
             <th>
                 Email
-            </th>
-            <th>
-                Kodeord
             </th>
         </tr>
     </thead>
@@ -39,26 +34,28 @@
         {
             @foreach (var item in Model.Users)
             {
-                <tr>
-                    <td>
-                        @item.UserId
-                    </td>
-                    <td>
-                        @item.Name
-                    </td>
-                    <td>
-                        @item.AfterName
-                    </td>
-                    <td>
-                        @item.PhoneNumber
-                    </td>
-                    <td>
-                        @item.Email
-                    </td>
-                    <td>
-                        @item.Password
-                    </td>
-                </tr>
+        <tr>
+            <td>
+                @item.Name
+                @item.AfterName
+            </td>
+            <td>
+                @item.PhoneNumber
+            </td>
+            <td>
+                @item.Email
+            </td>
+            @*<td>
+                <p>
+                    <a asp-page="/Users/Update" asp-route-id="@item.UserId">Updater</a>
+                </p>
+            </td>
+            <td>
+                <p>
+                    <a asp-page="/Users/Delete" asp-route-id="@item.UserId">Slet</a>
+                </p>
+            </td>*@
+        </tr>
             }
         }
     </tbody>

@@ -1,0 +1,76 @@
+﻿@page
+@model EarthNear1.Pages.Users.ProfileModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<style>
+    th{
+        background-color: aquamarine;
+    }
+    label{
+        font-weight: bold;
+    }
+    .table{
+        width: 50%;
+    }
+    .form-group{
+        border: groove;
+        padding: 10px;
+    }
+</style>
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            <label asp-for="User.Name" class="control-label"></label>
+        </th>
+        <td>
+            @Model.User.Name
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <label asp-for="User.AfterName" class="control-label"></label>
+        </th>
+        <td>
+            @Model.User.AfterName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <label asp-for="User.PhoneNumber" class="control-label"></label>
+        </th>
+        <td>
+            @Model.User.PhoneNumber
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <label asp-for="User.Email" class="control-label"></label>
+        </th>
+        <td>
+            @Model.User.Email
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <label asp-for="User.Password" class="control-label"></label>
+        </th>
+        <td>
+            @Model.User.Password
+        </td>
+    </tr>
+</table>
+<form method="post" asp-page-handler="UpdateUser">
+    <p>
+        <button class="alert-info">Updatere dit info</button>
+    </p>
+    <input type="hidden" name="id" value="@Model.User.UserId" />
+</form>
+<form method="post" asp-page-handler="DeleteUser">
+    <p>
+        <button class="alert-info">Slet din konto</button>
+    </p>
+    <input type="hidden" name="id" value="@Model.User.UserId" />
+</form>
