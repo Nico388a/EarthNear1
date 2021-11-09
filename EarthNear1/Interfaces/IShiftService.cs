@@ -9,6 +9,7 @@ namespace EarthNear1.Interfaces
    public interface IShiftService
    {
        Task<IEnumerable<Shift>> GetAllShiftAsync();
+       Task<Shift> GetShiftById(int id);
        Task AddShiftAsync(Shift shift);
        Task<Shift> GetShiftByIdAsync(int id);
        Task DeleteShiftAsync(Shift shift);

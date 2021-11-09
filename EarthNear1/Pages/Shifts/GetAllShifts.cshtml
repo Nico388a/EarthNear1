@@ -1,4 +1,5 @@
 ﻿@page
+@using EarthNear1.Models
 @model EarthNear1.Pages.Shifts.GetAllShiftsModel
 @{
     ViewData["Title"] = "GetAllShifts";
@@ -12,19 +13,19 @@
     <thead>
         <tr>
             <th>
-                Vagt Id
+                Dato
             </th>
             <th>
-                Tirsdag
+                Tidspunkt
             </th>
             <th>
-                Torsdag
+                VagtTyper
             </th>
             <th>
-                Fredag
+                Vagtstatus
             </th>
             <th>
-                Vagt på døgnet
+                Knapper
             </th>
         </tr>
     </thead>
@@ -34,27 +35,29 @@
         @foreach (var item in Model.Shifts)
         {
             <tr>
+
+                <td>
+                    @item.Date
+                </td>
+
+                <td>
+                    @item.TimeFrom - @item.TimeTo
+                </td>
+
+                <td >
+                    @item.ShiftType
+                </td>
                 
                 <td>
-                    @item.ShiftId
+                    @item.ShiftStatus
                 </td>
 
                 <td>
-                    @item.DateFrom
-                    @item.DateTo
+                    <a class="btn btn-primary" asp-page="/Shifts/UpdateShift" asp-route-id="@item.ShiftId">Opdater vagt</a>
                 </td>
+                
                 <td>
-                    @item.DateFrom
-                    @item.DateTo
-                </td>
-
-                <td>
-                    @item.DateFrom
-                    @item.DateTo
-                </td>
-
-                <td>
-                    @item.Description
+                    <a class="btn btn-danger" asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId">Slet vagt</a>
                 </td>
 
             </tr>

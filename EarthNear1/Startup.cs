@@ -27,9 +27,9 @@ namespace EarthNear1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddSingleton<IShiftService, ShiftService>();
+            services.AddTransient<IShiftService, ShiftService>();
             services.AddTransient<ADO_ShiftService>();
-            services.AddSingleton<IUserService, UserService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<ADO_UserService>();
         }
 

@@ -1,4 +1,5 @@
 ﻿@page
+@using EarthNear1.Models
 @model EarthNear1.Pages.Shifts.CreateShiftModel
 @{
     ViewData["Title"] = "CreateShift";
@@ -7,19 +8,37 @@
 
 <form method="post" class="container-fluid">
     <div class="form-group">
-        <label asp-for="@Model.Shift.DateFrom" class="control-label">Vagt fra</label>
-        <input asp-for="@Model.Shift.DateFrom" class="form-control"/>
-        <span asp-validation-for="@Model.Shift.DateFrom" class="text-danger"></span>
+        <label asp-for="@Model.Shift.Date" class="control-label">Vagt fra</label>
+        <input asp-for="@Model.Shift.Date"  class="form-control" type="date" asp-format=""/>
+        <span asp-validation-for="@Model.Shift.Date" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="@Model.Shift.DateTo" class="control-label">Vagt til</label>
-        <input asp-for="@Model.Shift.DateTo" class="form-control"/>
-        <span asp-validation-for="@Model.Shift.DateTo" class="text-danger"></span>
+        <label asp-for="@Model.Shift.TimeFrom" class="control-label">Vagt fra</label>
+        <input asp-for="@Model.Shift.TimeFrom" class="form-control" type="time" value="12:00"/>
+        <span asp-validation-for="@Model.Shift.TimeFrom" class="text-danger"></span>
     </div>
+    
     <div class="form-group">
-        <label asp-for="@Model.Shift.Description" class="control-label">Dag/Aftenvagt</label>
-        <input asp-for="@Model.Shift.Description" class="form-control"/>
-        <span asp-validation-for="@Model.Shift.Description" class="text-danger"></span>
+        <label asp-for="@Model.Shift.TimeTo" class="control-label">Vagt til</label>
+        <input asp-for="@Model.Shift.TimeTo" class="form-control" type="time" value="12:00"/>
+        <span asp-validation-for="@Model.Shift.TimeTo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Shift.ShiftType" class="control-label">Vagttype</label>
+        <select asp-for="@Model.Shift.ShiftType" asp-items="Html.GetEnumSelectList<TypeOfShift>()" class="form-control"></select>
+        <span asp-validation-for="@Model.Shift.ShiftType" class="text-danger"></span>
+    </div>
+    @*<div class="form-group">
+        <label asp-for="@Model.Shift.ShiftType" class="control-label">Vagttype</label>
+        <select asp-for="@Model.Shift.ShiftType" class="form-control"
+                asp-items="Html.GetEnumSelectList<TypeOfShift>()" type="text"/>
+        <span asp-validation-for="@Model.Shift.ShiftType" class="text-danger"></span>
+    </div>*@
+    <div class="form-group">
+        <label asp-for="@Model.Shift.ShiftStatus" class="control-label">Status</label>
+        <input asp-for="@Model.Shift.ShiftStatus" class="form-control"/>
+        <span asp-validation-for="@Model.Shift.ShiftStatus" class="text-danger"></span>
     </div>
 
     <div class="form-group">

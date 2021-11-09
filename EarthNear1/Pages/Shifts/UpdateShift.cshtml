@@ -1,0 +1,47 @@
+﻿@page
+@model EarthNear1.Pages.Shifts.UpdateShiftModel
+@{
+    ViewData["Title"] = "UpdateShift";
+
+    <h1>Opdatere vagt</h1>
+    <form method="post">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label hidden="hidden" asp-for="@Model.Shift.ShiftId" class="control-label"></label>
+                        <input hidden="hidden" asp-for="@Model.Shift.ShiftId" class="form-control" />
+                        <span asp-validation-for="@Model.Shift.ShiftId" class="btn btn-danger"></span>
+                    </div>
+                    <label asp-for="@Model.Shift.Date" class="control-label"></label>
+                    <input asp-for="@Model.Shift.Date" class="form-control" />
+                    <span asp-validation-for="@Model.Shift.Date" class="btn btn-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Shift.TimeFrom" class="control-label"></label>
+                    <input asp-for="@Model.Shift.TimeFrom" />
+                    <span asp-validation-for="@Model.Shift.TimeFrom" class="btn btn-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Shift.TimeTo" class="control-label"></label>
+                    <input asp-for="@Model.Shift.TimeTo" class="form-control" />
+                    <span asp-validation-for="@Model.Shift.TimeTo" class="btn btn-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Shift.ShiftType" class="control-label"></label>
+                    <input asp-for="Shift.ShiftType" class="form-control"/>
+                    <span asp-validation-for="@Model.Shift.ShiftType" class="btn btn-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Shift.ShiftStatus" class="control-label"></label>
+                    <input asp-for="@Model.Shift.ShiftStatus"/>
+                    <span asp-validation-for="@Model.Shift.ShiftStatus" class="btn btn-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Gem" class="btn btn-primary"/>
+                </div>
+
+            </div>
+        </div>
+    </form>
+}

@@ -34,33 +34,93 @@ namespace EarthNear1.Services.ShiftServices
                     {
                         Shift @shift = new Shift();
                         shift.ShiftId = Convert.ToInt32(dataReader["ShiftId"]);
-                        shift.DateFrom = Convert.ToDateTime(dataReader["DateFrom"]);
-                        shift.DateTo = Convert.ToDateTime(dataReader["DateTo"]);
-                        shift.Description = Convert.ToString(dataReader["Description"]);
+                        shift.TimeFrom = (TimeSpan)dataReader["TimeFrom"];
+                        shift.TimeTo = (TimeSpan)dataReader["TimeTo"];
+                        shift.Date = Convert.ToDateTime(dataReader["Date"]);
+                        shift.ShiftType = Convert.ToString(dataReader["ShiftType"]);
+                        shift.ShiftStatus = Convert.ToString(dataReader["ShiftStatus"]);
                         shifts.Add(@shift);
                     }
                 }
             }
-
             return shifts;
+        }
+
+        public async Task<Shift> GetShiftByIdAsync(int id)
+        {
+            Shift shift = new Shift();
+            string sql = $"Select * From Shifts Where ShiftId=@Id";
+            await using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    SqlDataReader dataReader = await command.ExecuteReaderAsync();
+                    while (dataReader.Read())
+                    {
+                        shift.ShiftId = Convert.ToInt32(dataReader["ShiftId"]);
+                        shift.Date = Convert.ToDateTime(dataReader["Date"]);
+                        shift.TimeFrom = (TimeSpan)dataReader["TimeFrom"];
+                        shift.TimeTo = (TimeSpan)dataReader["TimeTo"];
+                        shift.ShiftType = Convert.ToString(dataReader["ShiftType"]);
+                        shift.ShiftStatus = Convert.ToString(dataReader["ShiftStatus"]);
+                    }
+                }
+            }
+            return shift;
         }
 
         public async Task CreateShiftAsync(Shift shift)
         {
-            string sql = $"Insert Into Shifts(DateFrom, DateTo, Description) Values(@DateFrom, @DateTo, @Description)";
+            string sql = $"Insert Into Shifts(Date, TimeFrom, TimeTo, ShiftType, ShiftStatus) Values(@Date, @TimeFrom, @TimeTo, @ShiftType, @ShiftStatus)";
             await using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 await using (SqlCommand command = new SqlCommand(sql, connection))
-                {
+                { 
                     await command.Connection.OpenAsync();
-                    command.Parameters.AddWithValue("@DateFrom", shift.DateFrom);
-                        command.Parameters.AddWithValue("@DateTo", shift.DateTo);
-                        command.Parameters.AddWithValue("@Description", shift.Description);
-                        int affectedRows = await command.ExecuteNonQueryAsync();
-                        
+                    command.Parameters.AddWithValue("@Date", shift.Date);
+                    command.Parameters.AddWithValue("@TimeFrom", shift.TimeFrom);
+                    command.Parameters.AddWithValue("@TimeTo", shift.TimeTo);
+                    command.Parameters.AddWithValue("@ShiftType", shift.ShiftType);
+                    command.Parameters.AddWithValue("@ShiftStatus", shift.ShiftStatus);
+                    int affectedRows = await command.ExecuteNonQueryAsync();
                 }
             }
 
+        }
+
+        public async Task DeleteShiftAsync(Shift shift)
+        {
+            string sql = $"Delete From Shifts Where ShiftId = @Id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", shift.ShiftId);
+                    int affectedRows = await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
+        public async Task UpdateShiftAsync(Shift shift)
+        {
+            string sql = $"Update Shifts Set Date=@Date, TimeFrom=@TimeFrom, TimeTo=@TimeTo, ShiftType=@ShiftType, ShiftStatus=@ShiftStatus Where ShiftId = @Id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", shift.Date);
+                    command.Parameters.AddWithValue("@Date", shift.Date);
+                    command.Parameters.AddWithValue("@TimeFrom", shift.TimeFrom);
+                    command.Parameters.AddWithValue("@TimeTo", shift.TimeTo);
+                    command.Parameters.AddWithValue("@ShiftType", shift.ShiftType);
+                    command.Parameters.AddWithValue("@ShiftStatus", shift.ShiftStatus);
+                    int affectedRows = await command.ExecuteNonQueryAsync();
+                }
+            }
         }
     }
 }

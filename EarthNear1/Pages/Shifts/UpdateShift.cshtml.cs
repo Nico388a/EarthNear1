@@ -9,26 +9,30 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EarthNear1.Pages.Shifts
 {
-    public class DeleteShiftModel : PageModel
+    public class UpdateShiftModel : PageModel
     {
-        [BindProperty]
+        [BindProperty] 
         public Shift Shift { get; set; }
 
         private IShiftService shiftService;
 
-        public DeleteShiftModel(IShiftService sService)
+        public UpdateShiftModel(IShiftService sService)
         {
             shiftService = sService;
         }
-
-        public async Task OnGetAsync(int id)
+        public async Task OnGet(int id)
         {
             Shift = await shiftService.GetShiftById(id);
         }
 
         public async Task<IActionResult> OnPostAsync()
-        { 
-            await shiftService.DeleteShiftAsync(Shift);
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            await shiftService.UpdateShiftAsync(Shift);
             return RedirectToPage("GetAllShifts");
         }
     }
