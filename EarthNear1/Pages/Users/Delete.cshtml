@@ -33,6 +33,11 @@
             <label asp-for="@Model.User.Password" class="control-label"></label>
             <input asp-for="@Model.User.Password" readonly="readonly" class="form-control" />
         </dd>
+        <dd class="form-group">
+            <label asp-for="@Model.User.Password2" class="control-label"></label>
+            <input asp-for="@Model.User.Password2" class="form-control" />
+            <span asp-validation-for="@Model.User.Password2" class="text-danger"></span>
+        </dd>
     </dl>
     <input type="submit" value="Delete" class="btn btn-danger"/>
     <a asp-page="GetAllUsers">Afbryd</a>
