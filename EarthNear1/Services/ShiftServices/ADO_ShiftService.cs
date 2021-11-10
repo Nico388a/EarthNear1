@@ -38,7 +38,7 @@ namespace EarthNear1.Services.ShiftServices
                         shift.TimeTo = (TimeSpan)dataReader["TimeTo"];
                         shift.Date = Convert.ToDateTime(dataReader["Date"]);
                         shift.ShiftType = Convert.ToString(dataReader["ShiftType"]);
-                        shift.ShiftStatus = Convert.ToString(dataReader["ShiftStatus"]);
+                        shift.ShiftStatus = Convert.ToBoolean(dataReader["ShiftStatus"]);
                         shifts.Add(@shift);
                     }
                 }
@@ -64,7 +64,7 @@ namespace EarthNear1.Services.ShiftServices
                         shift.TimeFrom = (TimeSpan)dataReader["TimeFrom"];
                         shift.TimeTo = (TimeSpan)dataReader["TimeTo"];
                         shift.ShiftType = Convert.ToString(dataReader["ShiftType"]);
-                        shift.ShiftStatus = Convert.ToString(dataReader["ShiftStatus"]);
+                        shift.ShiftStatus = Convert.ToBoolean(dataReader["ShiftStatus"]);
                     }
                 }
             }

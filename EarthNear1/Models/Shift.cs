@@ -16,15 +16,12 @@ namespace EarthNear1.Models
 
         public TypeOfShift TypeOfShift { get; set; }
 
-        public string ShiftStatus { get; set; }
+        public bool ShiftStatus { get; set; }
 
-        [BindProperty, DisplayFormat(DataFormatString = "{dd/MM/yyyy}"), DataType(DataType.Date)]
+        //[BindProperty, DisplayFormat(DataFormatString = "{dd/MM/yyyy}"), DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
-        
         public TimeSpan TimeFrom { get; set; }
-        
-        
         public TimeSpan TimeTo { get; set; }
 
     }

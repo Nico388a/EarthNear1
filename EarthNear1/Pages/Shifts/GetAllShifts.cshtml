@@ -35,13 +35,12 @@
         @foreach (var item in Model.Shifts)
         {
             <tr>
-
                 <td>
-                    @item.Date
+                    @item.Date.ToString("d")
                 </td>
 
                 <td>
-                    @item.TimeFrom - @item.TimeTo
+                    @item.TimeFrom:@item.TimeFrom - @item.TimeTo:@item.TimeTo.
                 </td>
 
                 <td >
@@ -49,19 +48,22 @@
                 </td>
                 
                 <td>
-                    @item.ShiftStatus
+                    
+                    <input type="radio" asp-for="@Model.Shift.ShiftStatus" value="true" class="custom-radio"/>Taget
+                    <input type="radio" asp-for="@Model.Shift.ShiftStatus" value="false" class="custom-radio"/> ikke taget
                 </td>
 
                 <td>
-                    <a class="btn btn-primary" asp-page="/Shifts/UpdateShift" asp-route-id="@item.ShiftId">Opdater vagt</a>
-                </td>
-                
-                <td>
-                    <a class="btn btn-danger" asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId">Slet vagt</a>
+                    <div>
+                        <a class="btn btn-primary form-control" asp-page="/Shifts/UpdateShift" asp-route-id="@item.ShiftId">Opdater vagt</a>
+                    </div>
+                    <div>
+                        <a class="btn btn-danger form-control" asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId">Slet vagt</a>
+                    </div>
                 </td>
 
             </tr>
-        }
+         }
     }
     </tbody>
 </table>

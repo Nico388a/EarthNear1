@@ -9,7 +9,7 @@
 <form method="post" class="container-fluid">
     <div class="form-group">
         <label asp-for="@Model.Shift.Date" class="control-label">Vagt fra</label>
-        <input asp-for="@Model.Shift.Date"  class="form-control" type="date" asp-format=""/>
+        <input asp-for="@Model.Shift.Date"  class="form-control" type="date"/>
         <span asp-validation-for="@Model.Shift.Date" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -28,17 +28,6 @@
         <label asp-for="@Model.Shift.ShiftType" class="control-label">Vagttype</label>
         <select asp-for="@Model.Shift.ShiftType" asp-items="Html.GetEnumSelectList<TypeOfShift>()" class="form-control"></select>
         <span asp-validation-for="@Model.Shift.ShiftType" class="text-danger"></span>
-    </div>
-    @*<div class="form-group">
-        <label asp-for="@Model.Shift.ShiftType" class="control-label">Vagttype</label>
-        <select asp-for="@Model.Shift.ShiftType" class="form-control"
-                asp-items="Html.GetEnumSelectList<TypeOfShift>()" type="text"/>
-        <span asp-validation-for="@Model.Shift.ShiftType" class="text-danger"></span>
-    </div>*@
-    <div class="form-group">
-        <label asp-for="@Model.Shift.ShiftStatus" class="control-label">Status</label>
-        <input asp-for="@Model.Shift.ShiftStatus" class="form-control"/>
-        <span asp-validation-for="@Model.Shift.ShiftStatus" class="text-danger"></span>
     </div>
 
     <div class="form-group">
