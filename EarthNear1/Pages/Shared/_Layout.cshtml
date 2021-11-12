@@ -29,9 +29,15 @@
                         </li>
                         @if (LogInService.GetLoggedUser() != null)
             {
-                    <li class="nav-item">
+                    @*<li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Users/GetAllUsers">Medlemmer</a>
+                    </li>*@
+                    @if (LogInService.GetLoggedUser().Admin)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Admin/AdminHub">Admin Hub</a>
                     </li>
+                }
             }
 
                         <li class="nav-item">

@@ -41,6 +41,12 @@
                 <span asp-validation-for="@Model.User.Password2" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="@Model.User.Admin" class="control-label"></label>
+                <input type="radio" asp-for="@Model.User.Admin" value="true" />
+                <input type="radio" asp-for="@Model.User.Admin" value="false" />
+                <span asp-validation-for="@Model.User.Admin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-dark" />&nbsp; | &nbsp;
                 <a asp-page="./GetAllUsers">Tilbage til medlemmer</a>
             </div>

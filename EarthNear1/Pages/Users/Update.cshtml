@@ -41,9 +41,14 @@
                 <input asp-for="@Model.User.Password2" class="form-control" />
                 <span asp-validation-for="@Model.User.Password2" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Gem" class="btn btn-primary" />
-                <a asp-page="./GetAllUsers">Tilbage til medlemslisten</a>
+                @if (Model.User.Admin)
+                {
+                    <p>&nbsp; | &nbsp;</p>
+                    <a asp-page="./GetAllUsers">Tilbage til medlemslisten</a>
+                }
             </div>
         </form>
     </div>

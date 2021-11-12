@@ -24,6 +24,8 @@ namespace EarthNear1.Models
         public string Password2 { get; set; }
         [BindProperty, DataType(DataType.Password), Display(Name = "Password")]
         public string PasswordCheck { get; set; }
+        [BindProperty, Required(ErrorMessage = "{0} skal fyldes ud")]
+        public bool Admin { get; set; }
 
     }
 }

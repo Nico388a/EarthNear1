@@ -32,12 +32,13 @@ namespace EarthNear1.Services.UserServices
                     while (await dataReader.ReadAsync())
                     {
                         User @user = new User();
-                        user.UserId = Convert.ToInt32(dataReader["UserId"]);
-                        user.Name = Convert.ToString(dataReader["Name"]);
-                        user.AfterName = Convert.ToString(dataReader["AfterName"]);
-                        user.PhoneNumber = Convert.ToString(dataReader["PhoneNumber"]);
-                        user.Email = Convert.ToString(dataReader["Email"]);
-                        user.Password = Convert.ToString(dataReader["Password"]);
+                        @user.UserId = Convert.ToInt32(dataReader["UserId"]);
+                        @user.Name = Convert.ToString(dataReader["Name"]);
+                        @user.AfterName = Convert.ToString(dataReader["AfterName"]);
+                        @user.PhoneNumber = Convert.ToString(dataReader["PhoneNumber"]);
+                        @user.Email = Convert.ToString(dataReader["Email"]);
+                        @user.Password = Convert.ToString(dataReader["Password"]);
+                        @user.Admin = Convert.ToBoolean(dataReader["Admin"]);
                         users.Add(@user);
                     }
                 }
@@ -63,6 +64,7 @@ namespace EarthNear1.Services.UserServices
                         @user.Email = Convert.ToString(dataReader["Email"]);
                         @user.PhoneNumber = Convert.ToString(dataReader["PhoneNumber"]);
                         @user.Password = Convert.ToString(dataReader["Password"]);
+                        @user.Admin = Convert.ToBoolean(dataReader["Admin"]);
                         users.Add(@user);
                     }
                 }
@@ -88,6 +90,7 @@ namespace EarthNear1.Services.UserServices
                         @user.PhoneNumber = Convert.ToString(dataReader["PhoneNumber"]);
                         @user.Email = Convert.ToString(dataReader["Email"]);
                         @user.Password = Convert.ToString(dataReader["Password"]);
+                        @user.Admin = Convert.ToBoolean(dataReader["Admin"]);
                     }
                 }
             }
@@ -95,7 +98,8 @@ namespace EarthNear1.Services.UserServices
         }
         public async Task CreateUserAsync(User user)
         {
-            string sql = $"Insert Into Users(Name, AfterName, PhoneNumber, Email, Password) Values(@Name, @AfterName, @PhoneNumber, @Email, @Password)";
+            string sql = $"Insert Into Users(Name, AfterName, PhoneNumber, Email, Password, Admin) " +
+                $"Values(@Name, @AfterName, @PhoneNumber, @Email, @Password, @Admin)";
             await using(SqlConnection connection= new SqlConnection(connectionString))
             {
                 await using(SqlCommand command = new SqlCommand(sql, connection))
@@ -105,6 +109,7 @@ namespace EarthNear1.Services.UserServices
                     command.Parameters.AddWithValue("@PhoneNumber", user.PhoneNumber);
                     command.Parameters.AddWithValue("@Email", user.Email);
                     command.Parameters.AddWithValue("@Password", user.Password);
+                    command.Parameters.AddWithValue("@Admin", user.Admin);
                     await command.Connection.OpenAsync();
                     int affectedRows = await command.ExecuteNonQueryAsync();
                 }
