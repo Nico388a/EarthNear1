@@ -53,6 +53,7 @@
     </dl>
     
     <form method="post">
+        <input type="hidden" asp-for="Shift.ShiftId"/>
         <input type="submit" value="Slet" class="btn btn-danger"/>
         <a asp-page="GetAllShifts">Tilbage til vagtliste</a>
     </form>

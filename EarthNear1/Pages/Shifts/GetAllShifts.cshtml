@@ -1,5 +1,6 @@
 ﻿@page
 @using EarthNear1.Models
+@using System.Runtime.Serialization
 @model EarthNear1.Pages.Shifts.GetAllShiftsModel
 @{
     ViewData["Title"] = "GetAllShifts";
@@ -7,7 +8,7 @@
 <h1>VagtTider</h1>
 
 <p>
-    <a asp-page="/Shifts/CreateShift"><strong>Ny vagt+</strong></a>
+    <a asp-page="/Shifts/CreateShift" class="btn btn-primary"><strong>Ny vagt+</strong></a>
 </p>
 <table class="table">
     <thead>
@@ -40,7 +41,7 @@
                 </td>
 
                 <td>
-                    @item.TimeFrom:@item.TimeFrom - @item.TimeTo:@item.TimeTo.
+                    @item.TimeFrom.Hours - @item.TimeTo
                 </td>
 
                 <td >
@@ -48,17 +49,15 @@
                 </td>
                 
                 <td>
-                    
                     <input type="radio" asp-for="@Model.Shift.ShiftStatus" value="true" class="custom-radio"/>Taget
                     <input type="radio" asp-for="@Model.Shift.ShiftStatus" value="false" class="custom-radio"/> ikke taget
                 </td>
 
                 <td>
-                    <div>
-                        <a class="btn btn-primary form-control" asp-page="/Shifts/UpdateShift" asp-route-id="@item.ShiftId">Opdater vagt</a>
-                    </div>
-                    <div>
-                        <a class="btn btn-danger form-control" asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId">Slet vagt</a>
+                    <div class="btn-group-vertical">
+                        <a class="btn btn-primary" asp-page="/Shifts/UpdateShift" asp-route-id="@item.ShiftId"><strong>Opdater vagt</strong></a>
+                        <br/>
+                        <a class="btn btn-danger"  asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId"><strong>Slet vagt </strong></a>
                     </div>
                 </td>
 

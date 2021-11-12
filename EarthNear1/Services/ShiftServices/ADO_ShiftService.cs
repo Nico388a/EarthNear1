@@ -50,7 +50,7 @@ namespace EarthNear1.Services.ShiftServices
         {
             Shift shift = new Shift();
             string sql = $"Select * From Shifts Where ShiftId=@Id";
-            await using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
                 using (SqlCommand command = new SqlCommand(sql, connection))
