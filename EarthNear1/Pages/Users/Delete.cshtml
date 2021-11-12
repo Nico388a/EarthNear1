@@ -39,6 +39,10 @@
             <span asp-validation-for="@Model.User.Password2" class="text-danger"></span>
         </dd>
     </dl>
-    <input type="submit" value="Delete" class="btn btn-danger"/>
-    <a asp-page="GetAllUsers">Afbryd</a>
+
+    <input type="submit" value="Delete" class="btn btn-danger" />&nbsp; | &nbsp;
+    @if (Model.User.Admin)
+    {
+        <a asp-page="./GetAllUsers">Afbryd</a>
+    }
 </form>
