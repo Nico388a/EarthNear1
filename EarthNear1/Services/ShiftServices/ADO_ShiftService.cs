@@ -87,7 +87,6 @@ namespace EarthNear1.Services.ShiftServices
                     int affectedRows = await command.ExecuteNonQueryAsync();
                 }
             }
-
         }
 
         public async Task DeleteShiftAsync(Shift shift)
@@ -112,7 +111,7 @@ namespace EarthNear1.Services.ShiftServices
                 await connection.OpenAsync();
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
-                    command.Parameters.AddWithValue("@Id", shift.Date);
+                    command.Parameters.AddWithValue("@Id", shift.ShiftId);
                     command.Parameters.AddWithValue("@Date", shift.Date);
                     command.Parameters.AddWithValue("@TimeFrom", shift.TimeFrom);
                     command.Parameters.AddWithValue("@TimeTo", shift.TimeTo);

@@ -12,6 +12,7 @@ using EarthNear1.Interfaces;
 using EarthNear1.Services.ShiftServices;
 using EarthNear1.Services.UserServices;
 using EarthNear1.Services;
+using EarthNear1.Services.BookingServices;
 
 namespace EarthNear1
 {
@@ -33,6 +34,8 @@ namespace EarthNear1
             services.AddTransient<ADO_ShiftService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ADO_UserService>();
+            services.AddTransient<IBookingService, BookingService>();
+            services.AddTransient<ADO_BookingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

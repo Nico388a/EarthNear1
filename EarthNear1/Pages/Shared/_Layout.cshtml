@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body style="background:#4CBB17">
+<body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="images/Logo/logo (1).png" style="max-height: 125px" alt="JordNærLogo"/></a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="/images/Logo/logo (1).png" style="max-height: 125px" alt="JordNærLogo"/></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,10 +23,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Book/GetAllBookings">Bookede vagter</a>
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Shifts/GetAllShifts">Vagttider</a>
                         </li>
+
+
                         @if (LogInService.GetLoggedUser() != null)
             {
                     @*<li class="nav-item">
