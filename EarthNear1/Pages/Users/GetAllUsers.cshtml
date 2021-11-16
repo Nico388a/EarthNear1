@@ -1,17 +1,28 @@
 ﻿@page
 @model EarthNear1.Pages.Users.GetAllUsersModel
+@using EarthNear1.Services
+@inject LogInService logInService
 @{
     ViewData["Title"] = "GetAllUsers";
+
 }
 <h1>Medlemmer</h1>
 
 <p>
-    <a asp-page="Create" class="btn btn-primary">tilføj nyt medlem</a>
+    @if (logInService.GetLoggedUser() != null)
+    {
+        @if (logInService.GetLoggedUser().Admin)
+        {
+            <a asp-page="Create" class="btn btn-primary"><strong>Ny medlem+</strong></a>
+        }
+    }
+
+
 </p>
 <form>
     <p>
-        <input type="text" asp-for="FilterCriteria"/>
-        <input type="submit" value="Filter"/>
+        <input type="text" asp-for="FilterCriteria" />
+        <input type="submit" value="Filter" />
     </p>
 </form>
 
@@ -45,16 +56,20 @@
             <td>
                 @item.Email
             </td>
-            @*<td>
-                <p>
-                    <a asp-page="/Users/Update" asp-route-id="@item.UserId">Updater</a>
-                </p>
-            </td>
-            <td>
-                <p>
-                    <a asp-page="/Users/Delete" asp-route-id="@item.UserId">Slet</a>
-                </p>
-            </td>*@
+            @if (logInService.GetLoggedUser() != null)
+            {
+                @if (logInService.GetLoggedUser().Admin)
+                {
+                    <td>
+                        <div class="btn-group-vertical">
+                            <a class="btn btn-primary" asp-page="/Users/Update" asp-route-id="@item.UserId"><strong>Updater medlem</strong></a>
+                            <br />
+                            <a class="btn btn-danger" asp-page="/Users/Delete" asp-route-id="@item.UserId"><strong>Slet medlem</strong></a>
+                        </div>
+                    </td>
+                }
+            }
+
         </tr>
             }
         }

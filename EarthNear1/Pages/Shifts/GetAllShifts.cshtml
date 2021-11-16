@@ -1,6 +1,8 @@
 ﻿@page
 @using EarthNear1.Models
 @using System.Runtime.Serialization
+@using EarthNear1.Services
+@inject LogInService logInService
 @model EarthNear1.Pages.Shifts.GetAllShiftsModel
 @{
     ViewData["Title"] = "GetAllShifts";
@@ -8,7 +10,15 @@
 <h1>VagtTider</h1>
 
 <p>
-    <a asp-page="/Shifts/CreateShift" class="btn btn-primary"><strong>Ny vagt+</strong></a>
+    @if (logInService.GetLoggedUser() != null)
+    {
+        @if (logInService.GetLoggedUser().Admin)
+        {
+            <a asp-page="/Shifts/CreateShift" class="btn btn-primary"><strong>Ny vagt+</strong></a>
+        }
+    }
+
+
 </p>
 <table class="table">
     <thead>
@@ -31,38 +41,42 @@
         </tr>
     </thead>
     <tbody>
-    @if (Model.Shifts.Count() != 0)
-    {
-        @foreach (var item in Model.Shifts)
+        @if (Model.Shifts.Count() != 0)
         {
-            <tr>
-                <td>
-                    @item.Date.ToString("d")
-                </td>
+            @foreach (var item in Model.Shifts)
+            {
+        <tr>
+            <td>
+                @item.Date.ToString("d")
+            </td>
 
-                <td>
-                    @item.TimeFrom.Hours - @item.TimeTo
-                </td>
+            <td>
+                @item.TimeFrom.Hours - @item.TimeTo
+            </td>
 
-                <td >
-                    @item.ShiftType
-                </td>
-                
-                <td>
-                    <input type="radio" asp-for="@Model.Shift.ShiftStatus" value="true" class="custom-radio"/>Taget
-                    <input type="radio" asp-for="@Model.Shift.ShiftStatus" value="false" class="custom-radio"/> ikke taget
-                </td>
+            <td>
+                @item.ShiftType
+            </td>
 
-                <td>
-                    <div class="btn-group-vertical">
-                        <a class="btn btn-primary" asp-page="/Shifts/UpdateShift" asp-route-id="@item.ShiftId"><strong>Opdater vagt</strong></a>
-                        <br/>
-                        <a class="btn btn-danger"  asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId"><strong>Slet vagt </strong></a>
-                    </div>
-                </td>
-
-            </tr>
-         }
-    }
+            <td>
+                <input type="radio" asp-for="@Model.Shift.ShiftStatus" value="true" class="custom-radio" />Taget
+                <input type="radio" asp-for="@Model.Shift.ShiftStatus" value="false" class="custom-radio" /> ikke taget
+            </td>
+            @if (logInService.GetLoggedUser() != null)
+            {
+                if (logInService.GetLoggedUser().Admin)
+                {
+                    <td>
+                        <div class="btn-group-vertical">
+                            <a class="btn btn-primary" asp-page="/Shifts/UpdateShift" asp-route-id="@item.ShiftId"><strong>Opdater vagt</strong></a>
+                            <br />
+                            <a class="btn btn-danger" asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId"><strong>Slet vagt </strong></a>
+                        </div>
+                    </td>
+                }
+            }
+        </tr>
+            }
+        }
     </tbody>
 </table>
