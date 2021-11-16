@@ -25,14 +25,15 @@ namespace EarthNear1.Pages.Shifts
             Shift = await shiftService.GetShiftById(id);
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(Shift shift)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            await shiftService.UpdateShiftAsync(Shift);
+            
+            await shiftService.UpdateShiftAsync(shift);
             return RedirectToPage("GetAllShifts");
         }
     }

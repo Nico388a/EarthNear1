@@ -1,0 +1,40 @@
+﻿@page
+@model EarthNear1.Pages.Book.GetAllBookingsModel
+@{
+    ViewData["Title"] = "GetAllBookings";
+}
+<h1>Bookede vagter</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Booking Id
+        </th>
+        <th>
+            Person
+        </th>
+        <th>
+            vagt
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.Bookings.Count() != 0)
+    {
+        @foreach (var item in Model.Bookings)
+        {
+            <tr>
+                <td>
+                    @item.BookingId
+                </td>
+                <td>
+                    @item.UserId
+                </td>
+                <td>
+                    @item.ShiftId
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
