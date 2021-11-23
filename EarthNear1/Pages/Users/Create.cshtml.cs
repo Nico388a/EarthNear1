@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,8 @@ using EarthNear1.Exceptions;
 using EarthNear1.Models;
 using EarthNear1.Interfaces;
 using System.Text;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 
 namespace EarthNear1.Pages.Users
 {
@@ -18,10 +21,14 @@ namespace EarthNear1.Pages.Users
         public string InfoText { get; set; }
         public IEnumerable<User> Users { get; private set; }
         private readonly IUserService userService;
+        private IWebHostEnvironment webHostEnvironment;
         public string RndPass { get; private set; }
-        public CreateModel(IUserService service)
+        [BindProperty]
+        public IFormFile Photo { get; set; }
+        public CreateModel(IUserService service, IWebHostEnvironment webHost)
         {
             userService = service;
+            webHostEnvironment = webHost;
         }
         public async Task OnGetAsync()
         {
@@ -46,8 +53,34 @@ namespace EarthNear1.Pages.Users
             {
                 return Page();
             }
+            if(Photo != null)
+            {
+                if (user.UserImage != null)
+                {
+                    string filePath = Path.Combine(webHostEnvironment.WebRootPath, "/image/Photos", user.UserImage);
+                    System.IO.File.Delete(filePath);
+                }
+                user.UserImage = ProcessUploadedFile();
+            }
             await userService.AddUserAsync(user);
+            Users = await userService.GetAllUsersAsync();
             return RedirectToPage("GetAllUsers");
+        }
+
+        private string ProcessUploadedFile()
+        {
+            string uniqueFileName = null;
+            if(Photo != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images/Photos");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + Photo.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using(var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    Photo.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
     }
 }
