@@ -17,7 +17,7 @@ namespace EarthNear1.Services.ShiftServices
         {
             shiftService = service;
         }
-
+        
         public async Task<IEnumerable<Shift>> GetAllShiftAsync()
         {
             return await shiftService.GetAllShiftsAsync();
@@ -32,12 +32,12 @@ namespace EarthNear1.Services.ShiftServices
         {
           await shiftService.CreateShiftAsync(shift);
         }
-
+        
         public Task<Shift> GetShiftByIdAsync(int id)
         {
             return shiftService.GetShiftByIdAsync(id);
         }
-
+        
         public async Task DeleteShiftAsync(Shift shift)
         {
             await shiftService.DeleteShiftAsync(shift);
