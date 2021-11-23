@@ -39,6 +39,7 @@ namespace EarthNear1.Services.UserServices
                         @user.Email = Convert.ToString(dataReader["Email"]);
                         @user.Password = Convert.ToString(dataReader["Password"]);
                         @user.Admin = Convert.ToBoolean(dataReader["Admin"]);
+                        @user.UserImage = Convert.ToString(dataReader["UserImage"]);
                         users.Add(@user);
                     }
                 }
@@ -65,6 +66,7 @@ namespace EarthNear1.Services.UserServices
                         @user.PhoneNumber = Convert.ToString(dataReader["PhoneNumber"]);
                         @user.Password = Convert.ToString(dataReader["Password"]);
                         @user.Admin = Convert.ToBoolean(dataReader["Admin"]);
+                        @user.UserImage = Convert.ToString(dataReader["UserImage"]);
                         users.Add(@user);
                     }
                 }
@@ -91,6 +93,7 @@ namespace EarthNear1.Services.UserServices
                         @user.Email = Convert.ToString(dataReader["Email"]);
                         @user.Password = Convert.ToString(dataReader["Password"]);
                         @user.Admin = Convert.ToBoolean(dataReader["Admin"]);
+                        @user.UserImage = Convert.ToString(dataReader["UserImage"]);
                     }
                 }
             }
@@ -98,8 +101,8 @@ namespace EarthNear1.Services.UserServices
         }
         public async Task CreateUserAsync(User user)
         {
-            string sql = $"Insert Into Users(Name, AfterName, PhoneNumber, Email, Password, Admin) " +
-                $"Values(@Name, @AfterName, @PhoneNumber, @Email, @Password, @Admin)";
+            string sql = $"Insert Into Users(Name, AfterName, PhoneNumber, Email, Password, Admin, UserImage) " +
+                $"Values(@Name, @AfterName, @PhoneNumber, @Email, @Password, @Admin, @UserImage)";
             await using(SqlConnection connection= new SqlConnection(connectionString))
             {
                 await using(SqlCommand command = new SqlCommand(sql, connection))
@@ -110,6 +113,7 @@ namespace EarthNear1.Services.UserServices
                     command.Parameters.AddWithValue("@Email", user.Email);
                     command.Parameters.AddWithValue("@Password", user.Password);
                     command.Parameters.AddWithValue("@Admin", user.Admin);
+                    command.Parameters.AddWithValue("@UserImage", user.UserImage);
                     await command.Connection.OpenAsync();
                     int affectedRows = await command.ExecuteNonQueryAsync();
                 }
@@ -117,7 +121,7 @@ namespace EarthNear1.Services.UserServices
         }
         public async Task<User> UpdateUserAsync(User user)
         {
-            string sql = $"Update Users Set Name=@Name, AfterName=@AfterName, PhoneNumber=@PhoneNumber, Email=@Email, Password=@Password Where UserId=@id";
+            string sql = $"Update Users Set Name=@Name, AfterName=@AfterName, PhoneNumber=@PhoneNumber, Email=@Email, Password=@Password, UserImage=@UserImage Where UserId=@id";
             await using (SqlConnection connection=new SqlConnection(connectionString))
             {
                 await using(SqlCommand command = new SqlCommand(sql, connection))
@@ -125,10 +129,11 @@ namespace EarthNear1.Services.UserServices
                     await command.Connection.OpenAsync();
                     command.Parameters.AddWithValue("@id", user.UserId);
                     command.Parameters.AddWithValue("@Name", user.Name);
-                    command.Parameters.AddWithValue("AfterName", user.AfterName);
-                    command.Parameters.AddWithValue("PhoneNumber", user.PhoneNumber);
-                    command.Parameters.AddWithValue("Email", user.Email);
-                    command.Parameters.AddWithValue("Password", user.Password);
+                    command.Parameters.AddWithValue("@AfterName", user.AfterName);
+                    command.Parameters.AddWithValue("@PhoneNumber", user.PhoneNumber);
+                    command.Parameters.AddWithValue("@Email", user.Email);
+                    command.Parameters.AddWithValue("@Password", user.Password);
+                    command.Parameters.AddWithValue("@UserImage", user.UserImage);
                     int affectedRows = await command.ExecuteNonQueryAsync();
                 }
             }

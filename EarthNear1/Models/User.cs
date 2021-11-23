@@ -26,6 +26,7 @@ namespace EarthNear1.Models
         public string PasswordCheck { get; set; }
         [BindProperty, Required(ErrorMessage = "{0} skal fyldes ud")]
         public bool Admin { get; set; }
+        public string UserImage { get; set; }
 
     }
 }
