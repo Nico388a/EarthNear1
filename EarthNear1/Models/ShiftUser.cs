@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace EarthNear1.Models
 {
-    public class Booking
+    public class ShiftUser
     {
-        public int BookingId { get; set; }
+        public int ShiftUserId { get; set; }
         public int UserId { get; set; }
-        public int ShiftId { get; set; }
-        public User User { get; set; }
+        public int ShiftTypeId { get; set; }
     }
 }

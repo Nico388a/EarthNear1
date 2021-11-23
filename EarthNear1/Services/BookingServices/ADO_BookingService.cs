@@ -37,6 +37,7 @@ namespace EarthNear1.Services.BookingServices
                         @booking.BookingId = Convert.ToInt32(dataReader["BookingId"]);
                         @booking.UserId = Convert.ToInt32(dataReader["UserId"]);
                         @booking.ShiftId = Convert.ToInt32(dataReader["ShiftId"]);
+                        bookings.Add(booking);
                     }
                 }
             }
@@ -56,6 +57,29 @@ namespace EarthNear1.Services.BookingServices
                     int affectedRows = await command.ExecuteNonQueryAsync();
                 }
             }
+        }
+
+        public async Task<List<Booking>> GetBookingByUserIdAsync(int id)
+        {
+            string sql = $"Select * From Booking Where UserId = @Id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@Id", id);
+                using (SqlDataReader dataReader = await command.ExecuteReaderAsync())
+                {
+                    while (dataReader.Read())
+                    {
+                        Booking @booking = new Booking();
+                        @booking.BookingId = Convert.ToInt32(dataReader["BookingId"]);
+                        @booking.UserId = Convert.ToInt32(dataReader["UserId"]);
+                        @booking.ShiftId = Convert.ToInt32(dataReader["ShiftId"]);
+                        bookings.Add(@booking);
+                    }
+                }
+            }
+            return bookings;
         }
     }
 }

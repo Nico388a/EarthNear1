@@ -17,14 +17,16 @@ namespace EarthNear1.Pages.Shifts
         public Shift Shift { get; set; }
 
         private IShiftService shiftService;
+        private IBookingService bookingService;
 
-        public GetAllShiftsModel(IShiftService sService)
+        public GetAllShiftsModel(IShiftService sService, IBookingService bService)
         {
             shiftService = sService;
+            bookingService = bService;
         }
         public async Task OnGetAsync()
         {
-           Shifts = await shiftService.GetAllShiftAsync();
+            Shifts = await shiftService.GetAllShiftAsync();
         }
     }
 }

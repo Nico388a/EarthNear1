@@ -22,7 +22,7 @@ namespace EarthNear1.Pages.Shifts
         }
         public async Task OnGet(int id)
         {
-            Shift = await shiftService.GetShiftById(id);
+            Shift = await shiftService.GetShiftByIdAsync(id);
         }
 
         public async Task<IActionResult> OnPostAsync(Shift shift)
@@ -31,8 +31,6 @@ namespace EarthNear1.Pages.Shifts
             {
                 return Page();
             }
-
-            
             await shiftService.UpdateShiftAsync(shift);
             return RedirectToPage("GetAllShifts");
         }

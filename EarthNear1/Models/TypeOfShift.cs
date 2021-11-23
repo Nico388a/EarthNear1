@@ -11,15 +11,13 @@ namespace EarthNear1.Models
     {
         [Display(Name = "Bagervagt")]
         Bagervagt = 1,
-        [Display(Name = "Kagebagervagt")]
-        Kagebagervagt = 2,
-        [Display(Name = "Bagefølvagt")]
-        Bagerfølvagt = 3,
+        [Display(Name = "Kage-bagervagt")]
+        Bagerfølvagt = 2,
         [Display(Name = "Cafévagt")]
-        Cafévagt = 4,
-        [Display(Name = "Caféfølvagt")]
-        Caféfølvagt = 5,
+        Cafévagt = 3,
+        [Display(Name ="Café-følvagt")]
+        Caféfølvagt = 4,
         [Display(Name = "Ønsker ikke tidlig vagt")]
-        ØnskerIkkeTidligVagt = 6
+        ØnskerIkkeTidligVagt = 5
     }
 }

@@ -30,9 +30,9 @@ namespace EarthNear1.Services.BookingServices
             throw new NotImplementedException();
         }
 
-        public Task<List<Booking>> GetBookingByUserId(int userId)
+        public async Task<List<Booking>> GetBookingByUserId(int userId)
         {
-            throw new NotImplementedException();
+            return await bookingService.GetBookingByUserIdAsync(userId);
         }
     }
 }

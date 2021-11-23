@@ -3,7 +3,9 @@
 @{
     ViewData["Title"] = "GetAllBookings";
 }
+
 <h1>Bookede vagter</h1>
+
 <table class="table">
     <thead>
     <tr>
@@ -11,7 +13,7 @@
             Booking Id
         </th>
         <th>
-            Person
+            Person Id
         </th>
         <th>
             vagt
@@ -19,22 +21,26 @@
     </tr>
     </thead>
     <tbody>
-    @if (Model.Bookings.Count() != 0)
-    {
-        @foreach (var item in Model.Bookings)
+        @if (Model.Bookings.Count() != 0)
         {
-            <tr>
-                <td>
-                    @item.BookingId
-                </td>
-                <td>
-                    @item.UserId
-                </td>
-                <td>
-                    @item.ShiftId
-                </td>
-            </tr>
+            @foreach (var item in Model.Bookings)
+            {
+                <tr>
+                        <td>
+                        @item.BookingId
+                        </td>
+                        
+                        <td>
+                            @item.UserId
+                        </td>
+                        
+                        <td>
+                            @item.ShiftId
+                        </td>
+
+                </tr>
+            }
+
         }
-    }
     </tbody>
 </table>

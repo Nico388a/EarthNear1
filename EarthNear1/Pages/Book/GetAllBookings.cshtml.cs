@@ -12,9 +12,10 @@ namespace EarthNear1.Pages.Book
     public class GetAllBookingsModel : PageModel
     {
         public IEnumerable<Booking> Bookings { get; private set; }
-        [BindProperty] public User User1 { get; set; }
-        private IBookingService bookingService;
+        [BindProperty] 
+        public User User1 { get; set; }
 
+        private IBookingService bookingService;
         public GetAllBookingsModel(IBookingService bService)
         {
             bookingService = bService;
@@ -24,5 +25,9 @@ namespace EarthNear1.Pages.Book
             Bookings = await bookingService.GetAllBookingsAsync();
         }
 
+        public async Task OnGetBookingAsync(int id)
+        {
+            Bookings = await bookingService.GetBookingByUserId(id);
+        }
     }
 }

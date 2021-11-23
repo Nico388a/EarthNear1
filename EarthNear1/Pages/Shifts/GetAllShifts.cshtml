@@ -7,7 +7,7 @@
 @{
     ViewData["Title"] = "GetAllShifts";
 }
-<h1>VagtTider</h1>
+<h1>Vagter</h1>
 
 <p>
     @if (logInService.GetLoggedUser() != null)
@@ -17,28 +17,26 @@
             <a asp-page="/Shifts/CreateShift" class="btn btn-primary"><strong>Ny vagt+</strong></a>
         }
     }
-
-
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                Dato
-            </th>
-            <th>
-                Tidspunkt
-            </th>
-            <th>
-                VagtTyper
-            </th>
-            <th>
-                Vagtstatus
-            </th>
-            <th>
-                Knapper
-            </th>
-        </tr>
+    <tr>
+        <th>
+            Dato
+        </th>
+        <th>
+            Tidspunkt
+        </th>
+        <th>
+            VagtTyper
+        </th>
+        <th>
+            Vagtstatus
+        </th>
+        <th>
+            Knapper
+        </th>
+    </tr>
     </thead>
     <tbody>
         @if (Model.Shifts.Count() != 0)
@@ -51,26 +49,27 @@
             </td>
 
             <td>
-                @item.TimeFrom.Hours - @item.TimeTo
+                @item.TimeFrom.Hours.ToString("00"):@item.TimeFrom.Minutes.ToString("00") - 
+                @item.TimeTo.Hours.ToString("00"):@item.TimeTo.Minutes.ToString("00")
             </td>
 
             <td>
-                @item.ShiftType
+                @item.TypeOfShift
             </td>
 
             <td>
-                <input type="radio" asp-for="@Model.Shift.ShiftStatus" value="true" class="custom-radio" />Taget
-                <input type="radio" asp-for="@Model.Shift.ShiftStatus" value="false" class="custom-radio" /> ikke taget
+                <input type="radio" asp-for="@Model.Shift.ShiftStatus" value="true" class="custom-radio"/>Taget
+                <input type="radio" asp-for="@Model.Shift.ShiftStatus" value="false" class="custom-radio"/> ikke taget
             </td>
             @if (logInService.GetLoggedUser() != null)
             {
                 if (logInService.GetLoggedUser().Admin)
                 {
                     <td>
-                        <div class="btn-group-vertical">
-                            <a class="btn btn-primary" asp-page="/Shifts/UpdateShift" asp-route-id="@item.ShiftId"><strong>Opdater vagt</strong></a>
-                            <br />
-                            <a class="btn btn-danger" asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId"><strong>Slet vagt </strong></a>
+                        <div style="margin: 50px">
+                            <a class="btn btn-primary" asp-page="/Book/CreateBook" asp-route-id="@item.ShiftId"><strong>Ledig vagt</strong></a>
+                            <a class="btn btn-primary" asp-page="/Shifts/UpdateShift"asp-route-id="@item.ShiftId"><strong>opdater vagt</strong></a>
+                            <a class="btn btn-danger" asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId"><strong>Slet vagt</strong></a>
                         </div>
                     </td>
                 }

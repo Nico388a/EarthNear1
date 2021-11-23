@@ -37,7 +37,7 @@ namespace EarthNear1.Services.ShiftServices
                         shift.TimeFrom = (TimeSpan)dataReader["TimeFrom"];
                         shift.TimeTo = (TimeSpan)dataReader["TimeTo"];
                         shift.Date = Convert.ToDateTime(dataReader["Date"]);
-                        shift.ShiftType = Convert.ToString(dataReader["ShiftType"]);
+                        shift.ShiftTypeId = Convert.ToInt32(dataReader["ShiftType"]);
                         shift.ShiftStatus = Convert.ToBoolean(dataReader["ShiftStatus"]);
                         shifts.Add(@shift);
                     }
@@ -63,7 +63,7 @@ namespace EarthNear1.Services.ShiftServices
                         shift.Date = Convert.ToDateTime(dataReader["Date"]);
                         shift.TimeFrom = (TimeSpan)dataReader["TimeFrom"];
                         shift.TimeTo = (TimeSpan)dataReader["TimeTo"];
-                        shift.ShiftType = Convert.ToString(dataReader["ShiftType"]);
+                        shift.ShiftTypeId = Convert.ToInt32(dataReader["ShiftType"]);
                         shift.ShiftStatus = Convert.ToBoolean(dataReader["ShiftStatus"]);
                     }
                 }
@@ -82,7 +82,7 @@ namespace EarthNear1.Services.ShiftServices
                     command.Parameters.AddWithValue("@Date", shift.Date);
                     command.Parameters.AddWithValue("@TimeFrom", shift.TimeFrom);
                     command.Parameters.AddWithValue("@TimeTo", shift.TimeTo);
-                    command.Parameters.AddWithValue("@ShiftType", shift.ShiftType);
+                    command.Parameters.AddWithValue("@ShiftType", shift.ShiftTypeId);
                     command.Parameters.AddWithValue("@ShiftStatus", shift.ShiftStatus);
                     int affectedRows = await command.ExecuteNonQueryAsync();
                 }
@@ -115,7 +115,7 @@ namespace EarthNear1.Services.ShiftServices
                     command.Parameters.AddWithValue("@Date", shift.Date);
                     command.Parameters.AddWithValue("@TimeFrom", shift.TimeFrom);
                     command.Parameters.AddWithValue("@TimeTo", shift.TimeTo);
-                    command.Parameters.AddWithValue("@ShiftType", shift.ShiftType);
+                    command.Parameters.AddWithValue("@ShiftType", shift.ShiftTypeId);
                     command.Parameters.AddWithValue("@ShiftStatus", shift.ShiftStatus);
                     int affectedRows = await command.ExecuteNonQueryAsync();
                 }
