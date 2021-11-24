@@ -24,7 +24,6 @@ namespace EarthNear1.Models
 
         public bool ShiftStatus { get; set; }
 
-        //[BindProperty, DisplayFormat(DataFormatString = "{dd/MM/yyyy}"), DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
         public TimeSpan TimeFrom { get; set; }
