@@ -15,7 +15,6 @@ namespace EarthNear1.Pages.Shifts
         public IEnumerable<Shift> Shifts { get; set; }
         [BindProperty] 
         public Shift Shift { get; set; }
-
         private IShiftService shiftService;
         private IBookingService bookingService;
 

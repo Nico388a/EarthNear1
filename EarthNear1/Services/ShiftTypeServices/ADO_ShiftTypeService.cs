@@ -24,7 +24,7 @@ namespace EarthNear1.Services.ShiftTypeServices
 
         public async Task<List<ShiftType>> GetAllShiftTypesAsync()
         {
-            string sql = $"Select * From ShiftType";
+            string sql = $"Select * From ShiftTypes";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -47,7 +47,7 @@ namespace EarthNear1.Services.ShiftTypeServices
         public async Task<ShiftType> GetShiftTypeById(int id)
         {
             ShiftType shiftType = new ShiftType();
-            string sql = "Select * From ShiftType Where ShiftTypeId = @Id";
+            string sql = $"Select * From ShiftTypes Where ShiftTypeId = @Id";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
@@ -67,12 +67,41 @@ namespace EarthNear1.Services.ShiftTypeServices
 
         public async Task CreateShiftTypeAsync(ShiftType shiftType)
         {
-            string sql = "Insert Into ShiftType(ShiftName) Values(@ShiftName)";
+            string sql = $"Insert Into ShiftTypes(ShiftName) Values(@ShiftName)";
             await using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 await using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     await command.Connection.OpenAsync();
+                    command.Parameters.AddWithValue("@ShiftName", shiftType.ShiftName);
+                    int affectedRows = await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
+        public async Task DeleteShiftTypeAsync(ShiftType shiftType)
+        {
+            string sql = $"Delete From ShiftTypes Where ShiftTypeId = @Id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", shiftType.ShiftTypeId);
+                    int affectedRows = await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
+        public async Task UpdateShiftypeAsync(ShiftType shiftType)
+        {
+            string sql = $"Update ShiftTypes Set ShiftName=@ShiftName Where ShiftTypeId=@Id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", shiftType.ShiftTypeId);
                     command.Parameters.AddWithValue("@ShiftName", shiftType.ShiftName);
                     int affectedRows = await command.ExecuteNonQueryAsync();
                 }

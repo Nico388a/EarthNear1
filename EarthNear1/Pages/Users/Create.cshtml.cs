@@ -57,7 +57,7 @@ namespace EarthNear1.Pages.Users
             {
                 if (user.UserImage != null)
                 {
-                    string filePath = Path.Combine(webHostEnvironment.WebRootPath, "/image/Photos", user.UserImage);
+                    string filePath = Path.Combine(webHostEnvironment.WebRootPath, "/images/Photos", user.UserImage);
                     System.IO.File.Delete(filePath);
                 }
                 user.UserImage = ProcessUploadedFile();

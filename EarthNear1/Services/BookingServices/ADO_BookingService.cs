@@ -59,6 +59,28 @@ namespace EarthNear1.Services.BookingServices
             }
         }
 
+        public async Task<Booking> GetBookingByIdAsync(int id)
+        {
+            Booking booking = new Booking();
+            string sql = $"Select * From Booking Where BookingId = @Id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+               await connection.OpenAsync();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    SqlDataReader dataReader = await command.ExecuteReaderAsync();
+                    while (dataReader.Read())
+                    {
+                        booking.BookingId = Convert.ToInt32(dataReader["BookingId"]);
+                        booking.ShiftId = Convert.ToInt32(dataReader["ShiftId"]);
+                        booking.UserId = Convert.ToInt32(dataReader["UserId"]);
+                    }
+                }
+            }
+            return booking;
+        }
+
         public async Task<List<Booking>> GetBookingByUserIdAsync(int id)
         {
             string sql = $"Select * From Booking Where UserId = @Id";
@@ -80,6 +102,20 @@ namespace EarthNear1.Services.BookingServices
                 }
             }
             return bookings;
+        }
+
+        public async Task DeleteBookingAsync(Booking booking)
+        {
+            string sql = $"Delete From Booking Where BookingId = @Id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+               await connection.OpenAsync();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", booking.BookingId);
+                    int affectedRow = await command.ExecuteNonQueryAsync();
+                }
+            }
         }
     }
 }

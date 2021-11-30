@@ -1,8 +1,12 @@
 ﻿@page
 @using EarthNear1.Models
 @using System.Runtime.Serialization
+@using EarthNear1.Interfaces
 @using EarthNear1.Services
+@using System.Diagnostics.Eventing.Reader
 @inject LogInService logInService
+@inject IShiftTypeService typeService
+@inject IBookingService bookingService
 @model EarthNear1.Pages.Shifts.GetAllShiftsModel
 @{
     ViewData["Title"] = "GetAllShifts";
@@ -54,13 +58,18 @@
             </td>
 
             <td>
-                @item.TypeOfShift
+                @typeService.GetShiftTypeByIdAsync(@item.ShiftTypeId).Result.ShiftName
             </td>
+            
+            @if (@bookingService.GetBookingByIdAsync(item.ShiftId) != null)
+            {
+                <td>
+                    <b>@item.ShiftStatus</b>
+                </td>
+            }
+            
 
-            <td>
-                <input type="radio" asp-for="@Model.Shift.ShiftStatus" value="true" class="custom-radio"/>Taget
-                <input type="radio" asp-for="@Model.Shift.ShiftStatus" value="false" class="custom-radio"/> ikke taget
-            </td>
+
             @if (logInService.GetLoggedUser() != null)
             {
                 if (logInService.GetLoggedUser().Admin)

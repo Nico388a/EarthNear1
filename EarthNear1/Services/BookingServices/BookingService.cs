@@ -25,14 +25,19 @@ namespace EarthNear1.Services.BookingServices
             await bookingService.AddBookingAsync(booking);
         }
 
-        public Task<Booking> GetBookingById(int id)
+        public async Task<Booking> GetBookingByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await bookingService.GetBookingByIdAsync(id);
         }
 
         public async Task<List<Booking>> GetBookingByUserId(int userId)
         {
             return await bookingService.GetBookingByUserIdAsync(userId);
+        }
+
+        public async Task DeleteBookingAsync(Booking booking)
+        {
+            await bookingService.DeleteBookingAsync(booking);
         }
     }
 }

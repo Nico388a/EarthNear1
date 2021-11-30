@@ -1,5 +1,10 @@
 ﻿@page
+@using EarthNear1.Interfaces
 @model EarthNear1.Pages.Book.GetAllBookingsModel
+@inject IUserService userService
+@inject IShiftService sService
+@inject IShiftTypeService typeService
+
 @{
     ViewData["Title"] = "GetAllBookings";
 }
@@ -10,13 +15,18 @@
     <thead>
     <tr>
         <th>
-            Booking Id
+            Vagt
+        </th>
+
+        <th>
+            Person
+        </th>
+
+        <th>
+            Dato
         </th>
         <th>
-            Person Id
-        </th>
-        <th>
-            vagt
+            Tid
         </th>
     </tr>
     </thead>
@@ -26,17 +36,22 @@
             @foreach (var item in Model.Bookings)
             {
                 <tr>
-                        <td>
-                        @item.BookingId
-                        </td>
-                        
-                        <td>
-                            @item.UserId
-                        </td>
-                        
-                        <td>
-                            @item.ShiftId
-                        </td>
+                    <td>
+                        @sService.GetShiftByIdAsync(item.ShiftId).Result.ShiftTypeId
+                    </td>
+
+                    <td>
+                        @userService.GetUserFromIdAsync(item.UserId).Result.Name
+                    </td>
+
+                    <td>
+                        @sService.GetShiftByIdAsync(item.ShiftId).Result.Date.ToString("d")
+                    </td>
+
+                    <td>
+                        @sService.GetShiftByIdAsync(item.ShiftId).Result.TimeFrom.Hours.ToString("00"):@sService.GetShiftByIdAsync(item.ShiftId).Result.TimeFrom.Minutes.ToString("00") -
+                        @sService.GetShiftByIdAsync(item.ShiftId).Result.TimeTo.Hours.ToString("00"):@sService.GetShiftByIdAsync(item.ShiftId).Result.TimeTo.Minutes.ToString("00")
+                    </td>
 
                 </tr>
             }

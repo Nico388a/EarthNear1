@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using EarthNear1.Interfaces;
 using EarthNear1.Models;
+using EarthNear1.Services.ShiftTypeServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EarthNear1.Pages.Shifts
 {
@@ -13,11 +15,14 @@ namespace EarthNear1.Pages.Shifts
     {
         [BindProperty] 
         public Shift Shift { get; set; }
+        public SelectList ShiftNames { get; set; }
 
         private IShiftService shiftService;
-        public CreateShiftModel(IShiftService sService)
+        public CreateShiftModel(IShiftService sService, ADO_ShiftTypeService tService)
         {
             shiftService = sService;
+            Task<List<ShiftType>> shiftTypes = tService.GetAllShiftTypesAsync();
+            ShiftNames = new SelectList(shiftTypes.Result, "ShiftTypeId", "ShiftName");
         }
         public IActionResult OnGet()
         {

@@ -45,7 +45,7 @@ namespace EarthNear1.Services.ShiftServices
             }
             return shifts;
         }
-
+        
         public async Task<Shift> GetShiftByIdAsync(int id)
         {
             Shift shift = new Shift();
@@ -70,6 +70,7 @@ namespace EarthNear1.Services.ShiftServices
             }
             return shift;
         }
+
 
         public async Task CreateShiftAsync(Shift shift)
         {

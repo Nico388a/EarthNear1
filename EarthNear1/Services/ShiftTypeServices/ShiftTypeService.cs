@@ -23,9 +23,9 @@ namespace EarthNear1.Services.ShiftTypeServices
             await shiftTypeService.CreateShiftTypeAsync(shiftType);
         }
 
-        public Task DeleteShiftTypeAsync(ShiftType shiftType)
+        public async Task DeleteShiftTypeAsync(ShiftType shiftType)
         {
-            throw new NotImplementedException();
+            await shiftTypeService.DeleteShiftTypeAsync(shiftType);
         }
 
         public async Task<IEnumerable<ShiftType>> GetAllShiftTypesAsync()
@@ -38,9 +38,9 @@ namespace EarthNear1.Services.ShiftTypeServices
             return await shiftTypeService.GetShiftTypeById(id);
         }
 
-        public Task UpdateShiftTypeAsync(ShiftType shiftType)
+        public async Task UpdateShiftTypeAsync(ShiftType shiftType)
         {
-            throw new NotImplementedException();
+            await shiftTypeService.UpdateShiftypeAsync(shiftType);
         }
     }
 }

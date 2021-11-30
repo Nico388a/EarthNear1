@@ -6,7 +6,7 @@ using EarthNear1.Models;
 
 namespace EarthNear1.Interfaces
 {
-    interface IShiftTypeService
+    public interface IShiftTypeService
     {
         Task<IEnumerable<ShiftType>> GetAllShiftTypesAsync();
         Task AddShiftTypeAsync(ShiftType shift);

@@ -16,8 +16,6 @@ namespace EarthNear1.Models
         [Display(Name = "Cafévagt")]
         Cafévagt = 3,
         [Display(Name ="Café-følvagt")]
-        Caféfølvagt = 4,
-        [Display(Name = "Ønsker ikke tidlig vagt")]
-        ØnskerIkkeTidligVagt = 5
+        Caféfølvagt = 4
     }
 }

@@ -10,9 +10,10 @@ namespace EarthNear1.Interfaces
    {
        Task<IEnumerable<Booking>> GetAllBookingsAsync();
        Task AddBookingAsync(Booking booking);
-       Task<Booking> GetBookingById(int id);
+       Task<Booking> GetBookingByIdAsync(int id);
        Task<List<Booking>> GetBookingByUserId(int userId);
-       //Task<List<Shift>> GetBookingByBoatId(int boatId);
+       Task DeleteBookingAsync(Booking booking);
+        //Task<List<Shift>> GetBookingByBoatId(int boatId);
 
-   }
+    }
 }

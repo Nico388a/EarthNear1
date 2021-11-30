@@ -1,0 +1,26 @@
+﻿@page
+@model EarthNear1.Pages.Types.ShiftTypes.DeleteShiftTypeModel
+@{
+    ViewData["Title"] = "DeleteShiftType";
+}
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Id
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ShiftType.ShiftTypeId)
+        </dd>
+        <dt class="col-sm-2">
+            Vagttypenavn
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ShiftType.ShiftName)
+        </dd>
+    </dl>
+    <form method="post">
+        <input type="hidden" asp-for="ShiftType.ShiftTypeId"/>
+        <input type="submit" value="Slet" class="btn btn-danger"/>
+        <a asp-page="GetAllShiftTypes" class="btn btn-primary">Tilbage</a>
+    </form>
+</div>

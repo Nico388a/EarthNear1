@@ -11,5 +11,6 @@ namespace EarthNear1.Models
         public int UserId { get; set; }
         public int ShiftId { get; set; }
         public int ShiftTypeId { get; set; }
+
     }
 }

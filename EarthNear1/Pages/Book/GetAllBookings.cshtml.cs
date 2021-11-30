@@ -12,13 +12,13 @@ namespace EarthNear1.Pages.Book
     public class GetAllBookingsModel : PageModel
     {
         public IEnumerable<Booking> Bookings { get; private set; }
-        [BindProperty] 
-        public User User1 { get; set; }
 
         private IBookingService bookingService;
-        public GetAllBookingsModel(IBookingService bService)
+        private IUserService userService;
+        public GetAllBookingsModel(IBookingService bService, IUserService uService)
         {
             bookingService = bService;
+            userService = uService;
         }
         public async Task OnGetAsync()
         {
