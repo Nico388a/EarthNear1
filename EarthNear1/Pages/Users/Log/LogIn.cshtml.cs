@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using EarthNear1.Models;
 using EarthNear1.Interfaces;
 using EarthNear1.Services;
+using Microsoft.Extensions.Logging;
 
 namespace EarthNear1.Pages.Users.Log
 {
     public class LogInModel : PageModel
     {
+        private readonly ILogger<LogInModel> _logger;
         private IUserService userService;
         private LogInService logInService;
         public string AccessDenied = "";

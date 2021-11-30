@@ -14,13 +14,18 @@ namespace EarthNear1.Pages.Users
         [BindProperty(SupportsGet = true)]
         public string FilterCriteria { get; set; }
         public IEnumerable<User> Users { get; private set; }
+        public List<ShiftType> shiftUsers { get; set; }
         private IUserService userService { get; set; }
-        public GetAllUsersModel(IUserService service)
+        private IShiftUserService shiftUserService;
+        public GetAllUsersModel(IUserService service, IShiftUserService shiftUser)
         {
             userService = service;
+            shiftUserService = shiftUser;
         }
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int id)
         {
+            //shiftUsers = new List<ShiftUser>();
+            
             if (!String.IsNullOrEmpty(FilterCriteria))
             {
                 Users = await userService.GetUserByNameAsync(FilterCriteria);

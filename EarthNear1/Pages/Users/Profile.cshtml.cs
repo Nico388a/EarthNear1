@@ -38,5 +38,9 @@ namespace EarthNear1.Pages.Users
         {
             return RedirectToPage("/Users/Delete", new { id = id });
         }
+        public IActionResult OnPostCreateShiftUsers(int id)
+        {
+            return RedirectToPage("/Types/ShiftUsers/CreateShiftUsers", new { id = id });
+        }
     }
 }

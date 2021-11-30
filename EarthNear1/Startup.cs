@@ -34,6 +34,10 @@ namespace EarthNear1
             services.AddSingleton<LogInService>();
             services.AddTransient<IShiftService, ShiftService>();
             services.AddTransient<ADO_ShiftService>();
+            services.AddTransient<IShiftTypeService, ShiftTypeService>();
+            services.AddTransient<ADO_ShiftTypeService>();
+            services.AddTransient<IShiftUserService, ShiftUserService>();
+            services.AddTransient<ADO_ShiftUserService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ADO_UserService>();
             services.AddTransient<IBookingService, BookingService>();

@@ -1,69 +1,89 @@
 ﻿@page
+@using EarthNear1.Interfaces
+@inject IShiftTypeService theShiftType
+@inject IShiftUserService theUserType
 @model EarthNear1.Pages.Users.ProfileModel
 @{
     ViewData["Title"] = "Profile";
 }
 
-<style>
-    th{
-        background-color: aquamarine;
-    }
-    label{
-        font-weight: bold;
-    }
-    .table{
-        width: 50%;
-    }
-    .form-group{
-        border: groove;
-        padding: 10px;
-    }
-</style>
+@*<style>
+        th{
+            background-color: aquamarine;
+        }
+        label{
+            font-weight: bold;
+        }
+        .table{
+            width: 50%;
+        }
+        .form-group{
+            border: groove;
+            padding: 10px;
+        }
+    </style>*@
 
-<table class="table table-bordered">
-    <tr>
-        <td>
-            <img src="~/images/Photos/@Model.User.UserImage" class="rounded" width="80" height="70" />
-        </td>
-    </tr>
-    <tr>
-        <th>
-            <label asp-for="User.Name" class="control-label"></label>
-        </th>
-        <td>
-            @Model.User.Name
-            @Model.User.AfterName
-        </td>
-    </tr>
-    
-    <tr>
-        <th>
-            <label asp-for="User.PhoneNumber" class="control-label"></label>
-        </th>
-        <td>
-            @Model.User.PhoneNumber
-        </td>
-    </tr>
-    <tr>
-        <th>
-            <label asp-for="User.Email" class="control-label"></label>
-        </th>
-        <td>
-            @Model.User.Email
-        </td>
-    </tr>
-    <tr>
-        <th>
-            <label asp-for="User.Password" class="control-label"></label>
-        </th>
-        <td>
-            @Model.User.Password
-        </td>
-    </tr>
-</table>
+<div>
+    <img src="~/images/Photos/@Model.User.UserImage" class="rounded-circle" width="306" height="236" />
+    <table class="table">
+        <tr>
+            <th>
+                <label asp-for="User.Name" class="control-label"></label>
+            </th>
+            <td>
+                @Model.User.Name
+                @Model.User.AfterName
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                <label asp-for="User.PhoneNumber" class="control-label"></label>
+            </th>
+            <td>
+                @Model.User.PhoneNumber
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label asp-for="User.Email" class="control-label"></label>
+            </th>
+            <td>
+                @Model.User.Email
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label asp-for="User.Password" class="control-label"></label>
+            </th>
+            <td>
+                @Model.User.Password
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Jobtype
+            </th>
+            <td>
+                @foreach (var type in theUserType.GetUserTypes(Model.User.UserId).Result)
+                {
+                    <var>@theShiftType.GetShiftTypeByIdAsync(type.ShiftTypeId).Result.ShiftName,</var>
+
+                }
+            </td>
+        </tr>
+    </table>
+</div>
+
+<form method="post" asp-page-handler="CreateShiftUsers">
+    <p>
+        <button class="alert-info">Tilrette arbejdserfaringer</button>
+    </p>
+    <input type="hidden" name="id" value="@Model.User.UserId" />
+</form>
 <form method="post" asp-page-handler="UpdateUser">
     <p>
-        <button class="alert-info">Updatere dit info</button>
+        <button class="alert-info">Rediger profil</button>
     </p>
     <input type="hidden" name="id" value="@Model.User.UserId" />
 </form>

@@ -28,5 +28,13 @@ namespace EarthNear1.Pages.Admin
         {
             return RedirectToPage("/Shifts/GetAllShifts");
         }
+        public ActionResult OnPostAllShiftUsers()
+        {
+            return RedirectToPage("/Types/ShiftUsers/GetAllShiftUsers");
+        }
+        public ActionResult OnPostCreateShiftUsers()
+        {
+            return RedirectToPage("/Types/ShiftUsers/CreateShiftUsers");
+        }
     }
 }

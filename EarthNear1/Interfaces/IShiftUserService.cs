@@ -12,5 +12,6 @@ namespace EarthNear1.Interfaces
         Task AddShiftUserAsync(ShiftUser shiftUser);
         Task<ShiftUser> GetShiftUserById(int id);
         Task<List<ShiftUser>> GetShiftUserByUserId(int userId);
+        Task<List<ShiftType>> GetUserTypes(int id);
     }
 }
