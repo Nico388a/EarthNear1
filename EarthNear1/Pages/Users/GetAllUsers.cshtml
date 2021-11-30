@@ -1,7 +1,10 @@
 ﻿@page
 @model EarthNear1.Pages.Users.GetAllUsersModel
 @using EarthNear1.Services
+@using EarthNear1.Interfaces
 @inject LogInService logInService
+@inject IShiftUserService theUserType
+@inject IShiftTypeService theShiftType
 @{
     ViewData["Title"] = "GetAllUsers";
 
@@ -36,6 +39,9 @@
                 Navn
             </th>
             <th>
+                Jobstatus
+            </th>
+            <th>
                 Nummer
             </th>
             <th>
@@ -48,35 +54,42 @@
         {
             @foreach (var item in Model.Users)
             {
-        <tr>
-            <td>
-                <img src="~/images/Photos/@item.UserImage" class="rounded" width="80" height="70"/>
-            </td>
-            <td>
-                @item.Name
-                @item.AfterName
-            </td>
-            <td>
-                @item.PhoneNumber
-            </td>
-            <td>
-                @item.Email
-            </td>
-            @if (logInService.GetLoggedUser() != null)
-            {
-                @if (logInService.GetLoggedUser().Admin)
-                {
+                <tr>
                     <td>
-                        <div class="btn-group-vertical">
-                            <a class="btn btn-primary" asp-page="/Users/Update" asp-route-id="@item.UserId"><strong>Updater medlem</strong></a>
-                            <br />
-                            <a class="btn btn-danger" asp-page="/Users/Delete" asp-route-id="@item.UserId"><strong>Slet medlem</strong></a>
-                        </div>
+                        <img src="~/images/Photos/@item.UserImage" class="rounded-circle" width="80" height="70" />
                     </td>
-                }
-            }
+                    <td>
+                        @item.Name
+                        @item.AfterName
+                    </td>
+                    <td>
+                        @foreach(var type in theUserType.GetUserTypes(item.UserId).Result)
+                    {
+                        <var>@theShiftType.GetShiftTypeByIdAsync(type.ShiftTypeId).Result.ShiftName,</var>
 
-        </tr>
+                        }    
+                    </td>
+                    <td>
+                        @item.PhoneNumber
+                    </td>
+                    <td>
+                        @item.Email
+                    </td>
+                    @if (logInService.GetLoggedUser() != null)
+                    {
+                        @if (logInService.GetLoggedUser().Admin)
+                        {
+                            <td>
+                                <div class="btn-group-vertical">
+                                    <a class="btn btn-primary" asp-page="/Users/Update" asp-route-id="@item.UserId"><strong>Updater medlem</strong></a>
+                                    <br />
+                                    <a class="btn btn-danger" asp-page="/Users/Delete" asp-route-id="@item.UserId"><strong>Slet medlem</strong></a>
+                                </div>
+                            </td>
+                        }
+                    }
+
+                </tr>
             }
         }
     </tbody>

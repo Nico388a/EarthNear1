@@ -1,0 +1,48 @@
+﻿@page
+@using EarthNear1.Interfaces
+@inject IUserService theUser 
+@inject IShiftTypeService theShiftType
+@model EarthNear1.Pages.Types.ShiftUsers.GetAllShiftUsersModel
+@{
+    ViewData["Title"] = "GetAllShiftUsers";
+}
+
+<h1>Jobtyper</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ShiftUserId
+            </th>
+            <th>
+                Navn
+            </th>
+            <th>
+                Arbejdserfaring
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model.ShiftUsers.Count() != 0)
+            {
+                @foreach(var item in Model.ShiftUsers)
+                {
+                    
+        <tr>
+            <td>
+                @item.ShiftUserId
+            </td>
+            <td>
+                @theUser.GetUserFromIdAsync(item.UserId).Result.Name
+                @theUser.GetUserFromIdAsync(item.UserId).Result.AfterName
+            </td>
+            <td>
+                @theShiftType.GetShiftTypeByIdAsync(item.ShiftTypeId).Result.ShiftName
+            </td>
+            
+        </tr>
+                }
+            }
+    </tbody>
+</table>

@@ -27,14 +27,19 @@ namespace EarthNear1.Services.ShiftUserServices
             return await shiftUserService.GetAllShiftUsers();
         }
 
-        public Task<ShiftUser> GetShiftUserById(int id)
+        public async Task<ShiftUser> GetShiftUserById(int id)
         {
-            throw new NotImplementedException();
+            return await shiftUserService.GetShiftUserById(id);
         }
 
-        public Task<List<ShiftUser>> GetShiftUserByUserId(int userId)
+        public async Task<List<ShiftUser>> GetShiftUserByUserId(int userId)
         {
-            throw new NotImplementedException();
+            return await shiftUserService.GetShiftUserByUserId(userId);
+        }
+
+        public async Task<List<ShiftType>> GetUserTypes(int id)
+        {
+            return await shiftUserService.GetUserTypes(id);
         }
     }
 }
