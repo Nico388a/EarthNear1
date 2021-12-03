@@ -45,7 +45,7 @@ namespace EarthNear1
             services.AddTransient<IShiftTypeService, ShiftTypeService>();
             services.AddTransient<ADO_ShiftTypeService>();
             services.AddTransient<IShiftUserService, ShiftUserService>();
-            services.AddTransient<ADO_ShiftUserService>();
+            //services.AddTransient<ADO_ShiftUserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

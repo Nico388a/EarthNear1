@@ -19,11 +19,11 @@ namespace EarthNear1.Pages.Book
         private IBookingService bookingService;
         public SelectList userList;
 
-        public CreateBookModel(IBookingService bService, ADO_UserService uService)
+        public CreateBookModel(IBookingService bService, IUserService uService)
         {
             Booking = new Booking();
             bookingService = bService;
-            Task<List<User>> users = uService.GetAllUsersAsync();
+            Task<IEnumerable<User>> users = uService.GetAllUsersAsync();
             userList = new SelectList(users.Result, "UserId", "Name");
         }
         public IActionResult OnGetAsync(int id)

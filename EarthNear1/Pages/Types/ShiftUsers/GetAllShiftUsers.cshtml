@@ -25,24 +25,22 @@
     </thead>
     <tbody>
         @if(Model.ShiftUsers.Count() != 0)
+        {
+            @foreach(var item in Model.ShiftUsers)
             {
-                @foreach(var item in Model.ShiftUsers)
-                {
-                    
-        <tr>
-            <td>
-                @item.ShiftUserId
-            </td>
-            <td>
-                @theUser.GetUserFromIdAsync(item.UserId).Result.Name
-                @theUser.GetUserFromIdAsync(item.UserId).Result.AfterName
-            </td>
-            <td>
-                @theShiftType.GetShiftTypeByIdAsync(item.ShiftTypeId).Result.ShiftName
-            </td>
-            
-        </tr>
-                }
+                <tr>
+                    <td>
+                        @item.ShiftUserId
+                    </td>
+                    <td>
+                        @theUser.GetUserFromIdAsync(item.UserId).Result.Name
+                        @theUser.GetUserFromIdAsync(item.UserId).Result.AfterName
+                    </td>
+                    <td>
+                        @theShiftType.GetShiftTypeByIdAsync(item.ShiftTypeId).Result.ShiftName
+                    </td>
+                </tr>
             }
+         }
     </tbody>
 </table>
