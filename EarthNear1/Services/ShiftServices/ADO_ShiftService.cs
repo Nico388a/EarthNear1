@@ -71,7 +71,6 @@ namespace EarthNear1.Services.ShiftServices
             return shift;
         }
 
-
         public async Task CreateShiftAsync(Shift shift)
         {
             string sql = $"Insert Into Shifts(Date, TimeFrom, TimeTo, ShiftType, ShiftStatus) Values(@Date, @TimeFrom, @TimeTo, @ShiftType, @ShiftStatus)";

@@ -37,7 +37,8 @@
             {
                 <tr>
                     <td>
-                        @sService.GetShiftByIdAsync(item.ShiftId).Result.ShiftTypeId
+                        @typeService.GetShiftTypeByIdAsync(sService.GetShiftByIdAsync(item.ShiftId).Result.ShiftTypeId).Result.ShiftName
+                        
                     </td>
 
                     <td>

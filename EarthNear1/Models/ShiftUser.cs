@@ -11,7 +11,6 @@ namespace EarthNear1.Models
         public int ShiftUserId { get; set; }
         [DisplayName("Vagten")]
         public int UserId { get; set; }
-        public int ShiftId { get; set; }
         [DisplayName("Jobtype")]
         public int ShiftTypeId { get; set; }
 
