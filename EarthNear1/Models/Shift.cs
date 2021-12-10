@@ -13,14 +13,12 @@ namespace EarthNear1.Models
         public int ShiftId { get; set; }
         
         public int ShiftTypeId { get; set; }
-
         //[BindProperty, EnumDataType(typeof(TypeOfShift))]
         //public TypeOfShift TypeOfShift
         //{
         //    get { return (TypeOfShift)this.ShiftTypeId; }
         //    set { this.ShiftTypeId = (int)value; }
         //}
-
         public bool ShiftStatus { get; set; }
         public DateTime Date { get; set; }
         public TimeSpan TimeFrom { get; set; }

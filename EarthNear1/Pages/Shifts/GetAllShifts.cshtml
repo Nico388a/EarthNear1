@@ -49,7 +49,7 @@
             {
         <tr>
             <td>
-                @item.Date.ToString("d")
+                <strong>@item.Date.ToString("ddddddd")</strong> @item.Date.ToString("d")
             </td>
 
             <td>
@@ -61,14 +61,12 @@
                 @typeService.GetShiftTypeByIdAsync(@item.ShiftTypeId).Result.ShiftName
             </td>
             
-            @if (@bookingService.GetBookingByIdAsync(item.ShiftId) != null)
+            @*@if (@bookingService.GetBookingByIdAsync(item.ShiftId) != null)
             {
+            }*@
                 <td>
                     <b>@item.ShiftStatus</b>
                 </td>
-            }
-            
-
 
             @if (logInService.GetLoggedUser() != null)
             {
@@ -77,7 +75,11 @@
                     <td>
                         <div style="margin: 50px">
                             @*hidden="@bookingService.GetB(??) =! null ? true :false"*@
-                            <a class="btn btn-primary" asp-page="/Book/CreateBook" asp-route-id="@item.ShiftId"><strong>Ledig vagt</strong></a>
+                            @if (bookingService.GetBookingByShiftId(item.ShiftId) != null)
+                            {
+                                <a hidden="@bookingService.GetBookingByShiftId(item.ShiftId)" class="btn btn-primary" asp-page="/Book/CreateBook" asp-route-id="@item.ShiftId"><strong>Ledig vagt</strong></a>
+                            }
+
                             <a class="btn btn-primary" asp-page="/Shifts/UpdateShift" asp-route-id="@item.ShiftId"><strong>opdater vagt</strong></a>
                             <a class="btn btn-danger" asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId"><strong>Slet vagt</strong></a>
                         </div>

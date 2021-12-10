@@ -103,7 +103,28 @@ namespace EarthNear1.Services.BookingServices
             }
             return bookings;
         }
-
+        public async Task<List<Booking>> GetBookingByShiftIdAsync(int id)
+        {
+            string sql = $"Select * From Booking Where ShiftId = @Id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@Id", id);
+                using (SqlDataReader dataReader = await command.ExecuteReaderAsync())
+                {
+                    while (dataReader.Read())
+                    {
+                        Booking @booking = new Booking();
+                        @booking.BookingId = Convert.ToInt32(dataReader["BookingId"]);
+                        @booking.UserId = Convert.ToInt32(dataReader["UserId"]);
+                        @booking.ShiftId = Convert.ToInt32(dataReader["ShiftId"]);
+                        bookings.Add(@booking);
+                    }
+                }
+            }
+            return bookings;
+        }
         public async Task DeleteBookingAsync(Booking booking)
         {
             string sql = $"Delete From Booking Where BookingId = @Id";
