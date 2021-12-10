@@ -26,6 +26,9 @@
     <thead>
     <tr>
         <th>
+            Dag
+        </th>
+        <th>
             Dato
         </th>
         <th>
@@ -47,46 +50,48 @@
         {
             @foreach (var item in Model.Shifts)
             {
-        <tr>
-            <td>
-                <strong>@item.Date.ToString("ddddddd")</strong> @item.Date.ToString("d")
-            </td>
+                <tr>
+                    <td>
+                        @item.Date.ToString("") - @item.Date.ToString("ddddddd")
+                    </td>
+                    <td>
+                        @item.Date.ToString("d")
+                    </td>
 
-            <td>
-                @item.TimeFrom.Hours.ToString("00"):@item.TimeFrom.Minutes.ToString("00") - 
-                @item.TimeTo.Hours.ToString("00"):@item.TimeTo.Minutes.ToString("00")
-            </td>
+                    <td>
+                        @item.TimeFrom.Hours.ToString("00"):@item.TimeFrom.Minutes.ToString("00") -
+                        @item.TimeTo.Hours.ToString("00"):@item.TimeTo.Minutes.ToString("00")
+                    </td>
 
-            <td>
-                @typeService.GetShiftTypeByIdAsync(@item.ShiftTypeId).Result.ShiftName
-            </td>
-            
-            @*@if (@bookingService.GetBookingByIdAsync(item.ShiftId) != null)
+                    <td>
+                        @typeService.GetShiftTypeByIdAsync(@item.ShiftTypeId).Result.ShiftName
+                    </td>
+
+                    @*@if (@bookingService.GetBookingByIdAsync(item.ShiftId) != null)
             {
             }*@
-                <td>
-                    <b>@item.ShiftStatus</b>
-                </td>
-
-            @if (logInService.GetLoggedUser() != null)
-            {
-                if (logInService.GetLoggedUser().Admin)
-                {
                     <td>
-                        <div style="margin: 50px">
-                            @*hidden="@bookingService.GetB(??) =! null ? true :false"*@
-                            @if (bookingService.GetBookingByShiftId(item.ShiftId) != null)
-                            {
-                                <a hidden="@bookingService.GetBookingByShiftId(item.ShiftId)" class="btn btn-primary" asp-page="/Book/CreateBook" asp-route-id="@item.ShiftId"><strong>Ledig vagt</strong></a>
-                            }
-
-                            <a class="btn btn-primary" asp-page="/Shifts/UpdateShift" asp-route-id="@item.ShiftId"><strong>opdater vagt</strong></a>
-                            <a class="btn btn-danger" asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId"><strong>Slet vagt</strong></a>
-                        </div>
+                        <b>@item.ShiftStatus</b>
                     </td>
-                }
-            }
-        </tr>
+
+                    @if (logInService.GetLoggedUser() != null)
+                    {
+                        if (logInService.GetLoggedUser().Admin)
+                        {
+                            <td>
+                                <div style="margin: 50px">
+                                    @*hidden="@bookingService.GetB(??) =! null ? true :false"*@
+                                    @if (bookingService.GetBookingByShiftId(item.ShiftId) != null)
+                                    {
+                                        <a hidden="@bookingService.GetBookingByShiftId(item.ShiftId)" class="btn btn-primary" asp-page="/Book/CreateBook" asp-route-id="@item.ShiftId"><strong>Ledig vagt</strong></a>
+                                    }
+                                    <a class="btn btn-primary" asp-page="/Shifts/UpdateShift" asp-route-id="@item.ShiftId"><strong>opdater vagt</strong></a>
+                                    <a class="btn btn-danger" asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId"><strong>Slet vagt</strong></a>
+                                </div>
+                            </td>
+                        }
+                    }
+                </tr>
             }
         }
     </tbody>

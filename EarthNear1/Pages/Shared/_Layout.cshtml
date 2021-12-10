@@ -25,15 +25,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Book/GetAllBookings">Bookede vagter</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Shifts/GetAllShifts">Vagttider</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Types/ShiftTypes/GetAllShiftTypes">Vagttyper</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Book/GetAllBookings">Mine vagter</a>
                         </li>
 
                         <li class="nav-item">
@@ -41,11 +33,17 @@
                         </li>
                         @if (LogInService.GetLoggedUser() != null)
                         {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Shifts/GetAllShifts">Vagttider</a>
+                            </li>
 
                             @if (LogInService.GetLoggedUser().Admin)
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-page="/Admin/AdminHub">Admin Hub</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Types/ShiftTypes/GetAllShiftTypes">Vagttyper</a>
                                 </li>
                             }
                         }
