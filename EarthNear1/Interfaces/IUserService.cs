@@ -10,7 +10,7 @@ namespace EarthNear1.Interfaces
     {
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<IEnumerable<User>> GetUserByNameAsync(string name);
-        Task AddUserAsync(User user);
+        Task<bool> AddUserAsync(User user);
         Task DeleteUserAsync(User user);
         Task<User> GetUserFromIdAsync(int id);
         Task UpdateUserAsync(User user);

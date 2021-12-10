@@ -12,6 +12,7 @@ namespace EarthNear1.Interfaces
        Task AddBookingAsync(Booking booking);
        Task<Booking> GetBookingByIdAsync(int id);
        Task<List<Booking>> GetBookingByUserId(int userId);
+       Task<List<Booking>> GetBookingByShiftId(int shiftId);
        Task DeleteBookingAsync(Booking booking);
         //Task<List<Shift>> GetBookingByBoatId(int boatId);
 

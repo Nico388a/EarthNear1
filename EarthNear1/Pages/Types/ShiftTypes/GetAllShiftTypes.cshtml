@@ -34,15 +34,13 @@
                 <tr>
                     <td>
                         @item.ShiftName
+                        <div style="margin: 50px">
+                            <a asp-page="/Types/ShiftTypes/UpdateShiftType" asp-route-id="@item.ShiftTypeId" class="btn btn-primary"><strong>opdater</strong></a>
+                            <a asp-page="/Types/ShiftTypes/DeleteShiftType" asp-route-id="@item.ShiftTypeId" class="btn btn-danger"><strong>Slet type</strong></a>
+                        </div>
                     </td>
 
                     <td>
-                        <div>
-                            <a asp-page="/Types/ShiftTypes/UpdateShiftType" asp-route-id="@item.ShiftTypeId" class="btn btn-primary"><strong>opdater</strong></a>
-                        </div>
-                        <div >
-                            <a asp-page="/Types/ShiftTypes/DeleteShiftType" asp-route-id="@item.ShiftTypeId" class="btn btn-danger"><strong>Slet type</strong></a>
-                        </div>
                         <div>
                             <!--knap til slet-->
                             <button type="button" class="btn-danger" data-toggle="modal" data-target="#exampleModal">
@@ -50,7 +48,7 @@
                             </button>
 
                             <!--Koden der viser modalboksen-->
-                            
+                            <form method="post">
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
@@ -76,23 +74,17 @@
                                                             @Html.DisplayFor(model => model.ShiftType.ShiftName)
                                                         </dd>
                                                     </dl>
-                                                    <form method="post">
-                                                        <input type="hidden" asp-for="ShiftType.ShiftTypeId"/>
-                                                        <input type="submit" value="Slet" class="btn btn-danger"/>
-                                                        <a asp-page="GetAllShiftTypes" class="btn btn-primary">Tilbage</a>
-                                                    </form>
+
+                                                    <input type="hidden" asp-for="ShiftType.ShiftTypeId" />
+                                                    <input type="submit" value="Slet" class="btn btn-danger" />
+                                                    <a asp-page="GetAllShiftTypes" class="btn btn-primary">Tilbage</a>
+
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <form method="post">
-                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                                    <input type="hidden" asp-for="ShiftType.ShiftTypeId"/>
-                                                    <input type="submit" class="btn btn-danger" value="slet"><input />
-                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </form>
                         </div>
                     </td>
                 </tr>

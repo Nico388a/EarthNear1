@@ -97,9 +97,10 @@ namespace EarthNear1.Services.UserServices
                     }
                 }
             }
-                return @user;
+            return @user;
         }
-        public async Task CreateUserAsync(User user)
+
+        public async Task<bool> CreateUserAsync(User user)
         {
             string sql = $"Insert Into Users(Name, AfterName, PhoneNumber, Email, Password, Admin, UserImage) " +
                 $"Values(@Name, @AfterName, @PhoneNumber, @Email, @Password, @Admin, @UserImage)";
@@ -114,10 +115,28 @@ namespace EarthNear1.Services.UserServices
                     command.Parameters.AddWithValue("@Password", user.Password);
                     command.Parameters.AddWithValue("@Admin", user.Admin);
                     command.Parameters.AddWithValue("@UserImage", user.UserImage);
+                    if (UserEmailExist(user.Email))
+                    {
+                        throw new ExistsException("Denne email eksisterer allerede");
+                    }
                     await command.Connection.OpenAsync();
                     int affectedRows = await command.ExecuteNonQueryAsync();
+                    if (affectedRows == 1)
+                    {
+                        return true;
+                    }
                 }
+                return false;
             }
+        }
+        private bool UserEmailExist(string email)
+        {
+            foreach (User u in GetAllUsersAsync().Result)
+            {
+                if (u.Email == email)
+                    return true;
+            }
+            return false;
         }
         public async Task<User> UpdateUserAsync(User user)
         {

@@ -20,9 +20,9 @@ namespace EarthNear1.Services.UserServices
             return await userService.GetAllUsersAsync();
         }
 
-        public async Task AddUserAsync(User user)
+        public async Task<bool> AddUserAsync(User user)
         {
-            await userService.CreateUserAsync(user);
+           return await userService.CreateUserAsync(user);
         }
 
         public async Task DeleteUserAsync(User user)

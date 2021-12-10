@@ -32,7 +32,7 @@ namespace EarthNear1.Pages.Users
         }
         public async Task OnGetAsync()
         {
-            InfoText = "Enter new user";
+            InfoText = "Opret profil";
             RndPass = ChangePassword(5);
             Users = await userService.GetAllUsersAsync();
         }
@@ -53,17 +53,36 @@ namespace EarthNear1.Pages.Users
             {
                 return Page();
             }
-            if(Photo != null)
+
+            try
             {
-                if (user.UserImage != null)
+                if (Photo != null)
                 {
-                    string filePath = Path.Combine(webHostEnvironment.WebRootPath, "/images/Photos", user.UserImage);
-                    System.IO.File.Delete(filePath);
+                    if (user.UserImage != null)
+                    {
+                        string filePath = Path.Combine(webHostEnvironment.WebRootPath, "/images/Photos",
+                            user.UserImage);
+                        System.IO.File.Delete(filePath);
+                    }
+
+                    user.UserImage = ProcessUploadedFile();
                 }
-                user.UserImage = ProcessUploadedFile();
+
+                await userService.AddUserAsync(user);
+                Users = await userService.GetAllUsersAsync();
             }
-            await userService.AddUserAsync(user);
-            Users = await userService.GetAllUsersAsync();
+            catch (ExistsException e)
+            {
+                InfoText = $"Noget gik gik galt! {e.Message}";
+                RndPass = ChangePassword(8);
+                return Page();
+            }
+            catch (Exception ex)
+            {
+                InfoText = $"Noget gik gik galt! {ex.Message}";
+                RndPass = ChangePassword(8);
+                return Page();
+            }
             return RedirectToPage("GetAllUsers");
         }
 

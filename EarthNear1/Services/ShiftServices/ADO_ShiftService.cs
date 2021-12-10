@@ -23,25 +23,33 @@ namespace EarthNear1.Services.ShiftServices
 
         public async Task<List<Shift>> GetAllShiftsAsync()
         {
-            string sql = $"Select * From Shifts";
+            string sql = $"Select * From Shifts Order By Date";
             await using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                await connection.OpenAsync();
-                SqlCommand command = new SqlCommand(sql, connection);
-                using (SqlDataReader dataReader = await command.ExecuteReaderAsync())
+                try
                 {
-                    while (await dataReader.ReadAsync())
+                    await connection.OpenAsync();
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    using (SqlDataReader dataReader = await command.ExecuteReaderAsync())
                     {
-                        Shift @shift = new Shift();
-                        shift.ShiftId = Convert.ToInt32(dataReader["ShiftId"]);
-                        shift.TimeFrom = (TimeSpan)dataReader["TimeFrom"];
-                        shift.TimeTo = (TimeSpan)dataReader["TimeTo"];
-                        shift.Date = Convert.ToDateTime(dataReader["Date"]);
-                        shift.ShiftTypeId = Convert.ToInt32(dataReader["ShiftType"]);
-                        shift.ShiftStatus = Convert.ToBoolean(dataReader["ShiftStatus"]);
-                        shifts.Add(@shift);
+                        while (await dataReader.ReadAsync())
+                        {
+                            Shift @shift = new Shift();
+                            shift.ShiftId = Convert.ToInt32(dataReader["ShiftId"]);
+                            shift.TimeFrom = (TimeSpan)dataReader["TimeFrom"];
+                            shift.TimeTo = (TimeSpan)dataReader["TimeTo"];
+                            shift.Date = Convert.ToDateTime(dataReader["Date"]);
+                            shift.ShiftTypeId = Convert.ToInt32(dataReader["ShiftType"]);
+                            shift.ShiftStatus = Convert.ToBoolean(dataReader["ShiftStatus"]);
+                            shifts.Add(@shift);
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+                
             }
             return shifts;
         }
@@ -105,7 +113,8 @@ namespace EarthNear1.Services.ShiftServices
 
         public async Task UpdateShiftAsync(Shift shift)
         {
-            string sql = $"Update Shifts Set Date=@Date, TimeFrom=@TimeFrom, TimeTo=@TimeTo, ShiftType=@ShiftType, ShiftStatus=@ShiftStatus Where ShiftId = @Id";
+            string sql = $"Update Shifts Set Date=@Date, TimeFrom=@TimeFrom, TimeTo=@TimeTo," +
+                         $" ShiftType=@ShiftType, ShiftStatus=@ShiftStatus Where ShiftId = @Id";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
