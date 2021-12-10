@@ -41,5 +41,15 @@ namespace EarthNear1.Services.ShiftUserServices
         {
             return await shiftUserService.GetUserTypes(id);
         }
+
+        public async Task DeleteShiftUserAsync(ShiftUser shiftUser)
+        {
+            await shiftUserService.DeleteShiftUser(shiftUser);
+        }
+
+        public async Task UpdateShiftUserAsync(ShiftUser shiftUser)
+        {
+            await shiftUserService.UpdateShiftUser(shiftUser);
+        }
     }
 }

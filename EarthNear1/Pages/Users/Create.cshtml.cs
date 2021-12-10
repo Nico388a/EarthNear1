@@ -20,20 +20,24 @@ namespace EarthNear1.Pages.Users
         public User User { get; set; }
         public string InfoText { get; set; }
         public IEnumerable<User> Users { get; private set; }
+        public IEnumerable<ShiftType> shiftTypes { get; set; }
         private readonly IUserService userService;
+        private IShiftTypeService ShiftTypeService;
         private IWebHostEnvironment webHostEnvironment;
         public string RndPass { get; private set; }
         [BindProperty]
         public IFormFile Photo { get; set; }
-        public CreateModel(IUserService service, IWebHostEnvironment webHost)
+        public CreateModel(IUserService service, IWebHostEnvironment webHost, IShiftTypeService shiftType)
         {
             userService = service;
             webHostEnvironment = webHost;
+            ShiftTypeService = shiftType;
         }
         public async Task OnGetAsync()
         {
             InfoText = "Enter new user";
             RndPass = ChangePassword(5);
+            shiftTypes = await ShiftTypeService.GetAllShiftTypesAsync();
             Users = await userService.GetAllUsersAsync();
         }
         public string ChangePassword(int length)

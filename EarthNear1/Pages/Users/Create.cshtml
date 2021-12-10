@@ -1,6 +1,9 @@
 ﻿@page
 @model EarthNear1.Pages.Users.CreateModel
 @using EarthNear1.Services;
+@using EarthNear1.Interfaces
+@inject IUserService theUser
+@inject IShiftTypeService theShiftType
 @inject LogInService LogInService
 @{
     ViewData["Title"] = "Create user";
@@ -50,7 +53,7 @@
                     <label class="custom-file-label">Gem Billede</label>
                 </div>
             </div>
-            
+
             @if (LogInService.GetLoggedUser() != null)
             {
                 @if (LogInService.GetLoggedUser().Admin)

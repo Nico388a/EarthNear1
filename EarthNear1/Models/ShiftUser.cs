@@ -9,7 +9,7 @@ namespace EarthNear1.Models
     public class ShiftUser
     {
         public int ShiftUserId { get; set; }
-        [DisplayName("Vagten")]
+        [DisplayName("Vagt:")]
         public int UserId { get; set; }
         [DisplayName("Jobtype")]
         public int ShiftTypeId { get; set; }

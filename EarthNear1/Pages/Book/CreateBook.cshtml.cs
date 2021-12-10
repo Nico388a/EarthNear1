@@ -22,11 +22,11 @@ namespace EarthNear1.Pages.Book
         private LogInService logIn;
         public SelectList userList;
 
-        public CreateBookModel(IBookingService bService, ADO_UserService uService, LogInService log)
+        public CreateBookModel(IBookingService bService, IUserService uService, LogInService log)
         {
             Booking = new Booking();
             bookingService = bService;
-            Task<List<User>> users = uService.GetAllUsersAsync();
+            Task<IEnumerable<User>> users = uService.GetAllUsersAsync();
             logIn = log;
             userList = new SelectList(users.Result, "UserId", "Name");
         }

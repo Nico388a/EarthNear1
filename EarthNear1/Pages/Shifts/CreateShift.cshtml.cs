@@ -18,10 +18,10 @@ namespace EarthNear1.Pages.Shifts
         public SelectList ShiftNames { get; set; }
 
         private IShiftService shiftService;
-        public CreateShiftModel(IShiftService sService, ADO_ShiftTypeService tService)
+        public CreateShiftModel(IShiftService sService, IShiftTypeService tService)
         {
             shiftService = sService;
-            Task<List<ShiftType>> shiftTypes = tService.GetAllShiftTypesAsync();
+            Task<IEnumerable<ShiftType>> shiftTypes = tService.GetAllShiftTypesAsync();
             ShiftNames = new SelectList(shiftTypes.Result, "ShiftTypeId", "ShiftName");
         }
         public IActionResult OnGet()

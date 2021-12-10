@@ -17,18 +17,21 @@ namespace EarthNear1.Pages.Types.ShiftUsers
     {
         [BindProperty]
         public ShiftUser shiftUser { get; set; }
-        private IShiftUserService shiftUserService;
+        private IShiftUserService sUserService;
+        private IShiftTypeService sTypeService;
         private LogInService logService;
         public SelectList typesList { get; set; }
+        public IEnumerable<ShiftType> shifttypes { get; set; } 
         [BindProperty]
         public User User { get; set; }
-        public CreateShiftUsersModel(IShiftUserService uShiftService, ADO_ShiftTypeService sTypeService, LogInService lService)
+        public CreateShiftUsersModel(IShiftUserService shiftuserService, IShiftTypeService shifttypeService, LogInService lService)
         {
             shiftUser = new ShiftUser();
-            shiftUserService = uShiftService;
+            sUserService = shiftuserService;
+            sTypeService = shifttypeService;
             logService = lService;
-            Task<List<ShiftType>> shifttypes = sTypeService.GetAllShiftTypesAsync();
-            typesList = new SelectList(shifttypes.Result, "ShiftTypeId", "ShiftName");
+            shifttypes = sTypeService.GetAllShiftTypesAsync().Result;
+            //typesList = new SelectList(shifttypes.Result, "ShiftTypeId", "ShiftName");
         }
         public IActionResult OnGetAsync(int id)
         {
@@ -39,7 +42,7 @@ namespace EarthNear1.Pages.Types.ShiftUsers
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            await shiftUserService.AddShiftUserAsync(shiftUser);
+            await sUserService.AddShiftUserAsync(shiftUser);
             return RedirectToPage("GetAllShiftUsers");
         }
     }

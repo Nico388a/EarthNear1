@@ -13,9 +13,6 @@
     <thead>
         <tr>
             <th>
-                ShiftUserId
-            </th>
-            <th>
                 Navn
             </th>
             <th>
@@ -30,14 +27,16 @@
             {
                 <tr>
                     <td>
-                        @item.ShiftUserId
-                    </td>
-                    <td>
                         @theUser.GetUserFromIdAsync(item.UserId).Result.Name
                         @theUser.GetUserFromIdAsync(item.UserId).Result.AfterName
                     </td>
                     <td>
                         @theShiftType.GetShiftTypeByIdAsync(item.ShiftTypeId).Result.ShiftName
+                    </td>
+                    <td>
+                        <div>
+                            <a asp-page="/Types/ShiftUsers/UpdateShiftUser" asp-route-id="@item.UserId" class="btn btn-primary">Updater</a>
+                        </div>
                     </td>
                 </tr>
             }

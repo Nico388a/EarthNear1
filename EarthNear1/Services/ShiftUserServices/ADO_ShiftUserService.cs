@@ -39,7 +39,6 @@ namespace EarthNear1.Services.ShiftUserServices
                         shiftUser.ShiftUserId = Convert.ToInt32(dataReader["ShiftUserId"]);
                         shiftUser.ShiftTypeId = Convert.ToInt32(dataReader["ShiftTypeId"]);
                         shiftUser.UserId = Convert.ToInt32(dataReader["UserId"]);
-                        //shiftUser.ShiftId = Convert.ToInt32(dataReader["ShiftId"]);
                         shiftUsers.Add(shiftUser);
                     }
                 }
@@ -83,7 +82,6 @@ namespace EarthNear1.Services.ShiftUserServices
                         ShiftUser @shiftUser = new ShiftUser();
                         shiftUser.ShiftUserId = Convert.ToInt32(dataReader["ShiftUserId"]);
                         shiftUser.UserId = Convert.ToInt32(dataReader["UserId"]);
-                        //shiftUser.ShiftId = Convert.ToInt32(dataReader["ShiftId"]);
                         shiftUser.ShiftTypeId = Convert.ToInt32(dataReader["ShiftTypeId"]);
                         shiftUsers.Add(shiftUser);
                     }
@@ -101,8 +99,35 @@ namespace EarthNear1.Services.ShiftUserServices
                 {
                     command.Parameters.AddWithValue("@ShiftTypeId", shiftUser.ShiftTypeId);
                     command.Parameters.AddWithValue("@UserId", shiftUser.UserId);
-                    //command.Parameters.AddWithValue("@ShiftId", shiftUser.ShiftId);
                     int affectedRow = await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
+        public async Task UpdateShiftUser(ShiftUser shiftUser)
+        {
+            string sql = "Update ShiftUser Set ShiftTypeId=@ShiftTypeId, UserId=@Userid Where ShiftUserId=@id";
+            await using(SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await using(SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    await command.Connection.OpenAsync();
+                    command.Parameters.AddWithValue("@id", shiftUser.ShiftUserId);
+                    command.Parameters.AddWithValue("@ShiftTypeId", shiftUser.ShiftTypeId);
+                    command.Parameters.AddWithValue("@UserId", shiftUser.UserId);
+                    int affectedRows = await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
+        public async Task DeleteShiftUser(ShiftUser shiftUser)
+        {
+            string sql = "Delete From ShiftUser Where ShiftUserId=@id";
+            await using(SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                using(SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@id", shiftUser.ShiftUserId);
+                    int affectedRows = await command.ExecuteNonQueryAsync();
                 }
             }
         }

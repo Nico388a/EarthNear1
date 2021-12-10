@@ -1,4 +1,6 @@
 ﻿@page
+@using EarthNear1.Services
+@inject LogInService LogInService 
 @model EarthNear1.Pages.Users.UpdateModel
 @{
     ViewData["Title"] = "Update user";
@@ -50,6 +52,16 @@
                     <label class="custom-file-label">Indsæt photo</label>
                 </div>
             </div>
+            @if (LogInService.GetLoggedUser().Admin)
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.User.Admin" class="control-label"></label>
+                    <input type="radio" asp-for="@Model.User.Admin" value="true" />Ja
+                    <input type="radio" asp-for="@Model.User.Admin" value="false" />Nej
+                    <span asp-validation-for="@Model.User.Admin" class="text-danger"></span>
+                </div>
+            }
+
             <div class="form-group">
                 <input type="submit" value="Gem" class="btn btn-primary" />
             </div>

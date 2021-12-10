@@ -1,4 +1,7 @@
 ﻿@page
+@using EarthNear1.Interfaces
+@inject IShiftTypeService ShiftTypes
+@inject IUserService userSV
 @model EarthNear1.Pages.Types.ShiftUsers.CreateShiftUsersModel
 @{
     ViewData["Title"] = "CreateShiftUsers";
@@ -9,14 +12,21 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="@Model.shiftUser.UserId" class="control-label"></label>
-                <input asp-for="@Model.shiftUser.UserId" readonly="readonly" class="form-control" />
+                <label asp-for="@Model.shiftUser.UserId" class="control-label"></label><br />
+                @userSV.GetUserFromIdAsync(Model.User.UserId).Result.Name
+                @userSV.GetUserFromIdAsync(Model.User.UserId).Result.AfterName
+                <input hidden="hidden" asp-for="@Model.shiftUser.UserId" class="form-control" />
                 <span asp-validation-for="@Model.shiftUser.UserId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.shiftUser.ShiftTypeId" class="control-label"></label>
-                <select asp-for="@Model.shiftUser.ShiftTypeId" asp-items="@Model.typesList" class="form-control"></select>
-                <span asp-validation-for="@Model.shiftUser.ShiftTypeId" class="text-danger"></span>
+                <label asp-for="@Model.shiftUser.ShiftTypeId" class="control-label"></label><br />
+                @foreach (var jt in Model.shifttypes)
+                {
+                    <input type="checkbox" value="@jt.ShiftTypeId" />
+                    @jt.ShiftName<br />
+                }
+                @*<select asp-for="@Model.shiftUser.ShiftTypeId" asp-items="@Model.typesList" class="form-control"></select>*@
+                @*<span asp-validation-for="@Model.shiftUser.ShiftTypeId" class="text-danger"></span>*@
             </div>
 
             <div class="form-group">
