@@ -1,5 +1,7 @@
 ﻿@page
 @using EarthNear1.Models
+@using EarthNear1.Services
+@inject LogInService LogInService
 @model EarthNear1.Pages.Shifts.CreateShiftModel
 @{
     ViewData["Title"] = "CreateShift";
@@ -30,6 +32,15 @@
         <select asp-for="@Model.Shift.ShiftTypeId" asp-items="@Model.ShiftNames"></select>
         <span asp-validation-for="@Model.Shift.ShiftTypeId" class="text-danger"></span>
     </div>
+    
+    
+    @if (LogInService.GetLoggedUser() != null)
+    {
+        @if (LogInService.GetLoggedUser().Admin)
+        {
+            
+        }
+    }
 
     <div class="form-group">
         <input type="submit" value="Opret vagt" class="btn btn-primary"/>
