@@ -1,0 +1,65 @@
+﻿@page
+@using EarthNear1.Interfaces
+@using EarthNear1.Services
+@inject IShiftTypeService typeService
+@inject IShiftService shiftService
+@inject IBookingService bookingService
+@model EarthNear1.Pages.Book.AssignBookingModel
+@{
+    ViewData["Title"] = "AssignBooking";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Dato
+            </th>
+            <th>
+                Tidspunkt
+            </th>
+            <th>
+                VagtTyper
+            </th>
+            <th>
+                Tildel medlem
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Shifts.Count() != 0)
+        {
+            @foreach (var item in Model.Shifts)
+            {
+                <tr>
+                    <td>
+                        <strong>@item.Date.ToString("ddddddd")</strong> @item.Date.ToString("d")
+                    </td>
+
+                    <td>
+                        @item.TimeFrom.Hours.ToString("00"):@item.TimeFrom.Minutes.ToString("00") -
+                        @item.TimeTo.Hours.ToString("00"):@item.TimeTo.Minutes.ToString("00")
+                    </td>
+
+                    <td>
+                        @typeService.GetShiftTypeByIdAsync(@item.ShiftTypeId).Result.ShiftName
+                    </td>
+                    <td>
+                       <form method="post">
+                           <input type="hidden" asp-for="@item.ShiftId"/>
+                           <div class="form-group">
+                               <select asp-for="@Model.User1.UserId" asp-items="@Model.userList">
+                                   <option value="">--Tildel medlem--</option>
+                               </select>
+                               <span asp-validation-for="@Model.User1.UserId" class="text-danger"></span>
+                           </div>
+                           <div class="form-group">
+                               <input type="submit" value="Book" class="btn btn-primary"/>
+                           </div>
+                       </form>       
+                     </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -36,5 +36,9 @@ namespace EarthNear1.Pages.Admin
         {
             return RedirectToPage("/Types/ShiftUsers/CreateShiftUsers");
         }
+        public ActionResult OnPostAssignBooking()
+        {
+            return RedirectToPage("/Book/AssignBooking");
+        }
     }
 }
