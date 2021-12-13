@@ -48,10 +48,10 @@
                        <form method="post">
                            <input type="hidden" asp-for="@item.ShiftId"/>
                            <div class="form-group">
-                               <select asp-for="@Model.User1.UserId" asp-items="@Model.userList">
+                               <select asp-for="@Model.Booking.UserId" asp-items="@Model.userList">
                                    <option value="">--Tildel medlem--</option>
                                </select>
-                               <span asp-validation-for="@Model.User1.UserId" class="text-danger"></span>
+                               <span asp-validation-for="@Model.Booking.UserId" class="text-danger"></span>
                            </div>
                            <div class="form-group">
                                <input type="submit" value="Book" class="btn btn-primary"/>
