@@ -39,12 +39,13 @@ namespace EarthNear1.Pages.Book
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+            Booking.ShiftId = id;
             await bookingService.AddBookingAsync(Booking);
             return RedirectToPage("GetAllBookings");
         }

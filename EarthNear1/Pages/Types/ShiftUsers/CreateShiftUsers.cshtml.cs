@@ -24,6 +24,8 @@ namespace EarthNear1.Pages.Types.ShiftUsers
         public IEnumerable<ShiftType> shifttypes { get; set; } 
         [BindProperty]
         public User User { get; set; }
+        [BindProperty]
+        public List<int> AreChecked { get; set; }
         public CreateShiftUsersModel(IShiftUserService shiftuserService, IShiftTypeService shifttypeService, LogInService lService)
         {
             shiftUser = new ShiftUser();
@@ -40,8 +42,11 @@ namespace EarthNear1.Pages.Types.ShiftUsers
             shiftUser.ShiftTypeId = id;
             return Page();
         }
+        private readonly List<String> _users;
+        public List<string> Users => _users;
         public async Task<IActionResult> OnPostAsync()
         {
+            
             await sUserService.AddShiftUserAsync(shiftUser);
             return RedirectToPage("GetAllShiftUsers");
         }

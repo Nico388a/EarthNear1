@@ -40,5 +40,9 @@ namespace EarthNear1.Pages.Admin
         {
             return RedirectToPage("/Book/AssignBooking");
         }
+        public ActionResult OnPostAllShiftTypes()
+        {
+            return RedirectToPage("/Types/ShiftTypes/GetAllShiftTypes");
+        }
     }
 }
