@@ -22,7 +22,7 @@
                 <label asp-for="@Model.shiftUser.ShiftTypeId" class="control-label"></label><br />
                 @foreach (var jt in Model.shifttypes)
                 {
-                    <input type="checkbox" value="@jt.ShiftTypeId" />
+                    <input type="checkbox" name="AreChecked" value="@jt.ShiftTypeId" />
                     @jt.ShiftName<br />
                 }
                 @*<select asp-for="@Model.shiftUser.ShiftTypeId" asp-items="@Model.typesList" class="form-control"></select>*@

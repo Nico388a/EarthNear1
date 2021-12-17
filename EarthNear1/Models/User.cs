@@ -24,8 +24,7 @@ namespace EarthNear1.Models
         [BindProperty, Required(ErrorMessage ="{0} skal fyldes ud"), DataType(DataType.Password), 
             Display(Name="Gentag kodeord"), Compare(nameof(Password), ErrorMessage ="forkert kodeord")]
         public string Password2 { get; set; }
-        [BindProperty, DataType(DataType.Password), Display(Name = "Password"), 
-            Compare(nameof(Password), ErrorMessage = "Forkert kodeord")]
+        [BindProperty, DataType(DataType.Password), Display(Name = "Password")]
         public string PasswordCheck { get; set; }
         [BindProperty, Required(ErrorMessage = "{0} skal fyldes ud")]
         public bool Admin { get; set; }
