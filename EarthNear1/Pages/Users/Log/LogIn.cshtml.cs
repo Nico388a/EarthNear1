@@ -19,10 +19,12 @@ namespace EarthNear1.Pages.Users.Log
         public string AccessDenied = "";
         [BindProperty]
         public User User { get; set; }
-        public LogInModel(IUserService service, LogInService logIn)
+        public LogInModel(IUserService service, LogInService logIn, ILogger<LogInModel>logger)
         {
             userService = service;
             logInService = logIn;
+            _logger = logger;
+
         }
         public IActionResult OnGet()
         {

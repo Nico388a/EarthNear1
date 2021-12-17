@@ -66,7 +66,7 @@
             <td>
                 @if(bookingService.GetBookingByShiftId(item.ShiftId) == null)
                 {
-                    Console.WriteLine("Ingen");
+
                 }
             </td>
 
@@ -78,7 +78,7 @@
                 <div style="margin: 50px">
                     @if (logInService.GetLoggedUser() != null)
                     {
-                        @if (bookingService.GetBookingByShiftId(item.ShiftId) == null)
+                        @if (bookingService.GetBookingByShiftId(item.ShiftId) != null)
                         {
                             <a class="btn btn-primary" asp-page="/Book/CreateBook" asp-route-id="@item.ShiftId"><strong>Ledig vagt</strong></a>
                         }
@@ -93,7 +93,6 @@
                 </td>
             </tr>
             }
-
         }
     </tbody>
 </table>

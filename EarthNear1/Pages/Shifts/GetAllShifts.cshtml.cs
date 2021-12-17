@@ -23,6 +23,8 @@ namespace EarthNear1.Pages.Shifts
             shiftService = sService;
             bookingService = bService;
         }
+
+
         public async Task OnGetAsync()
         {
             Shifts = await shiftService.GetAllShiftAsync();
