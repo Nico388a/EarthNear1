@@ -81,6 +81,8 @@
                         {
                             <td>
                                 <div class="btn-group-vertical">
+                                    <a class="btn btn-primary" asp-page="/Book/GetAllBookings" asp-page-handler="MyBookings" asp-route-sid="@item.UserId">mine vagter</a>
+                                    <br/>
                                     <a class="btn btn-primary" asp-page="/Users/Update" asp-route-id="@item.UserId"><strong>Updater medlem</strong></a>
                                     <br />
                                     <a class="btn btn-danger" asp-page="/Users/Delete" asp-route-id="@item.UserId"><strong>Slet medlem</strong></a>

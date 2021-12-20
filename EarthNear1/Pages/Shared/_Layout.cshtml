@@ -30,8 +30,10 @@
                         @if (LogInService.GetLoggedUser() != null)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Book/GetAllBookings" 
-                                   asp-page-handler="MyBookings" asp-route-id="@LogInService.GetLoggedUser().UserId">Mine vagter</a>
+                                <a class="nav-link text-dark" asp-page="/Book/GetAllBookings" 
+                                   asp-page-handler="MyBookings" asp-route-sid="@LogInService.GetLoggedUser().UserId">
+                                Mine vagter
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Shifts/GetAllShifts">Vagttider</a>

@@ -25,9 +25,9 @@ namespace EarthNear1.Pages.Book
             Bookings = await bookingService.GetAllBookingsAsync();
         }
 
-        public async Task OnGetBookingAsync(int id)
+        public async Task OnGetMyBookingsAsync(int sid)
         {
-            Bookings = await bookingService.GetBookingByUserId(id);
+            Bookings = await bookingService.GetBookingByUserId(sid);
         }
     }
 }
