@@ -105,6 +105,7 @@ namespace EarthNear1.Services.BookingServices
         }
         public async Task<List<Booking>> GetBookingByShiftIdAsync(int id)
         {
+            List<Booking> bookingList = new List<Booking>();
             string sql = $"Select * From Booking Where ShiftId = @Id";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -119,11 +120,11 @@ namespace EarthNear1.Services.BookingServices
                         @booking.BookingId = Convert.ToInt32(dataReader["BookingId"]);
                         @booking.UserId = Convert.ToInt32(dataReader["UserId"]);
                         @booking.ShiftId = Convert.ToInt32(dataReader["ShiftId"]);
-                        bookings.Add(@booking);
+                        bookingList.Add(@booking);
                     }
                 }
             }
-            return bookings;
+            return bookingList;
         }
         public async Task DeleteBookingAsync(Booking booking)
         {
