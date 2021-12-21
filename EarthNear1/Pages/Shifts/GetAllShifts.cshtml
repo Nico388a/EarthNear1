@@ -8,7 +8,6 @@
 @inject IShiftTypeService typeService
 @inject IBookingService bookingService
 @inject IUserService uService
-@inject IShiftService sService
 @model EarthNear1.Pages.Shifts.GetAllShiftsModel
 @{
     ViewData["Title"] = "GetAllShifts";
@@ -82,8 +81,16 @@
                             <a class="btn btn-primary" asp-page="/Book/CreateBook" asp-route-id="@item.ShiftId"><strong>Ledig vagt</strong></a>
                         }
                         else
-                        {
-                            @uService.GetUserByNameAsync("Name")
+                        {                            
+                            foreach (var us in bookingService.GetBookingByShiftIdAsync(item.ShiftId).Result)
+                            {
+                                
+                <p>
+                    @uService.GetUserFromIdAsync(us.UserId).Result.Name
+                    @uService.GetUserFromIdAsync(us.UserId).Result.AfterName
+                </p>
+                                
+                            }
                         }
 
 
