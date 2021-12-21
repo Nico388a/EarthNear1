@@ -20,15 +20,15 @@ namespace EarthNear1.Pages.Book
         public User User1 { get; set; }
         private IBookingService bookingService;
         private LogInService logIn;
-        public SelectList userList;
+        //public SelectList userList;
 
         public CreateBookModel(IBookingService bService, IUserService uService, LogInService log)
         {
             Booking = new Booking();
             bookingService = bService;
-            Task<IEnumerable<User>> users = uService.GetAllUsersAsync();
+            //Task<IEnumerable<User>> users = uService.GetAllUsersAsync();
             logIn = log;
-            userList = new SelectList(users.Result, "UserId", "Name");
+            //userList = new SelectList(users.Result, "UserId", "Name");
         }
         public IActionResult OnGetAsync(int id)
         {
@@ -46,7 +46,7 @@ namespace EarthNear1.Pages.Book
             }
 
             await bookingService.AddBookingAsync(Booking);
-            return RedirectToPage("GetAllBookings");
+            return RedirectToPage("AssignBooking");
         }
     }
 }

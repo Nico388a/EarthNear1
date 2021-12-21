@@ -13,6 +13,7 @@ namespace EarthNear1.Pages.Shifts
     {
         [BindProperty (SupportsGet = true)]
         public IEnumerable<Shift> Shifts { get; set; }
+
         [BindProperty] 
         public Shift Shift { get; set; }
         private IShiftService shiftService;

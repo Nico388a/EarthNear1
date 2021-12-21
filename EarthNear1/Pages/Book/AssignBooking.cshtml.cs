@@ -19,14 +19,14 @@ namespace EarthNear1.Pages.Book
         public IEnumerable<Shift> Shifts { get; set; }
         [BindProperty]
         public Shift Shift { get; set; }
-        public User User1 { get; set; }
+        //public User User1 { get; set; }
         private IShiftService shiftService;
         private IBookingService bookingService;
         public SelectList userList;
         public AssignBookingModel(IBookingService bService, IUserService uService, IShiftService shiftServ)
         {
             Booking = new Booking();
-            User1 = new User();
+            //User1 = new User();
             bookingService = bService;
             shiftService = shiftServ;
             Task<IEnumerable<User>> users = uService.GetAllUsersAsync();

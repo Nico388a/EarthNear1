@@ -46,7 +46,7 @@
                     </td>
                     <td>
                         <form method="post" enctype="multipart/form-data">
-                            <input asp-for="@item.ShiftId" />
+                            <input hidden="hidden" asp-for="@item.ShiftId" />
                             <div class="form-group">
                                 <select asp-for="@Model.Booking.UserId" asp-items="@Model.userList">
                                     <option value="">--Tildel medlem--</option>

@@ -30,12 +30,12 @@ namespace EarthNear1.Services.BookingServices
             return await bookingService.GetBookingByIdAsync(id);
         }
 
-        public async Task<List<Booking>> GetBookingByUserId(int userId)
+        public async Task<List<Booking>> GetBookingByUserIdAsync(int userId)
         {
             return await bookingService.GetBookingByUserIdAsync(userId);
         }
 
-        public async Task<List<Booking>> GetBookingByShiftId(int shiftId)
+        public async Task<List<Booking>> GetBookingByShiftIdAsync(int shiftId)
         {
             return await bookingService.GetBookingByShiftIdAsync(shiftId);
         }
