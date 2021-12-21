@@ -26,7 +26,7 @@ namespace EarthNear1.Pages.Book
         {
             Booking = new Booking();
             bookingService = bService;
-            //Task<IEnumerable<User>> users = uService.GetAllUsersAsync();
+            Task<IEnumerable<User>> users = uService.GetAllUsersAsync();
             logIn = log;
             //userList = new SelectList(users.Result, "UserId", "Name");
         }
@@ -46,7 +46,7 @@ namespace EarthNear1.Pages.Book
             }
 
             await bookingService.AddBookingAsync(Booking);
-            return RedirectToPage("AssignBooking");
+            return RedirectToPage("/Shifts/GetAllShifts");
         }
     }
 }
