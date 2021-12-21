@@ -23,7 +23,7 @@
         }
     </style>*@
 
-<div>
+<div class="media border p-3">
     <img src="~/images/Photos/@Model.User.UserImage" class="rounded-circle" width="306" height="236" />
     <table class="table">
         <tr>
@@ -77,19 +77,19 @@
 
 <form method="post" asp-page-handler="CreateShiftUser">
     <p>
-        <button class="alert-info">Tilrette arbejdserfaringer</button>
+        <button class="btn btn-primary">Tilrette arbejdserfaringer</button>
     </p>
     <input type="hidden" name="id" value="@Model.User.UserId" />
 </form>
 <form method="post" asp-page-handler="UpdateUser">
     <p>
-        <button class="alert-info">Rediger profil</button>
+        <button class="btn btn-primary">Rediger profil</button>
     </p>
     <input type="hidden" name="id" value="@Model.User.UserId" />
 </form>
 <form method="post" asp-page-handler="DeleteUser">
     <p>
-        <button class="alert-info">Slet din konto</button>
+        <button class="btn btn-danger">Slet din konto</button>
     </p>
     <input type="hidden" name="id" value="@Model.User.UserId" />
 </form>
