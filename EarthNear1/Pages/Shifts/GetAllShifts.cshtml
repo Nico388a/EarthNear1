@@ -7,6 +7,8 @@
 @inject LogInService logInService
 @inject IShiftTypeService typeService
 @inject IBookingService bookingService
+@inject IUserService uService
+@inject IShiftService sService
 @model EarthNear1.Pages.Shifts.GetAllShiftsModel
 @{
     ViewData["Title"] = "GetAllShifts";
@@ -51,6 +53,7 @@
             <td>
                 @item.Date.ToString("ddddddd")
             </td>
+
             <td>
                 @item.Date.ToString("M")
             </td>
@@ -62,12 +65,6 @@
 
             <td>
                 @typeService.GetShiftTypeByIdAsync(@item.ShiftTypeId).Result.ShiftName
-            </td>
-            <td>
-                @if(bookingService.GetBookingByShiftIdAsync(item.ShiftId) != null)
-                {
-
-                }
             </td>
 
             @*<td>
@@ -86,7 +83,7 @@
                         }
                         else
                         {
-                            <p>Taget</p>
+                            @uService.GetUserByNameAsync("Name")
                         }
 
 

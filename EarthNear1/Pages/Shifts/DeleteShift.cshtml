@@ -6,43 +6,31 @@
 
 <div>
     <dl class="row">
-        <dt class="col-sm-2">
-            Dato:
+        <dt class="col-sm-4">
+            Dato
         </dt>
-        <dd class="col-sm-10">
-           @Html.DisplayFor(model=> model.Shift.Date.ToString("ddddddd")) -@Html.DisplayFor(model =>model.Shift.Date.ToString("D"))
+        <dd>
+            @Html.DisplayFor(model => model.Shift.Date)
         </dd>
-
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             Vagt fra:
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Shift.TimeFrom.Hours.ToString("00"))- @Html.DisplayFor(model => model.Shift.TimeFrom.Minutes.ToString("00"))
+            @Html.DisplayFor(model => model.Shift.TimeFrom)
         </dd>
-
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             Vagt Til
         </dt>
-
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Shift.TimeTo.Hours.ToString("00"))-@Html.DisplayFor(model => model.Shift.TimeTo.Minutes.ToString("00"))
+            @Html.DisplayFor(model => model.Shift.TimeTo)
         </dd>
-
-        <dt class="col-sm-2">
+        <dt class="col-sm-4">
             Vagttype
         </dt>
-
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Shift.ShiftTypeId)
         </dd>
 
-        <dt class="col-sm-2">
-            Vagt status
-        </dt>
-
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Shift.ShiftStatus)
-        </dd>
     </dl>
     
     <form method="post">

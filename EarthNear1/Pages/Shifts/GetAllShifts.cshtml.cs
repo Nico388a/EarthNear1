@@ -16,6 +16,8 @@ namespace EarthNear1.Pages.Shifts
 
         [BindProperty] 
         public Shift Shift { get; set; }
+
+        public User User1 { get; set; }
         private IShiftService shiftService;
         private IBookingService bookingService;
 
@@ -23,6 +25,7 @@ namespace EarthNear1.Pages.Shifts
         {
             shiftService = sService;
             bookingService = bService;
+            User1 = new User();
         }
 
 
