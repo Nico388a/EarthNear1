@@ -78,10 +78,15 @@
                 <div style="margin: 50px">
                     @if (logInService.GetLoggedUser() != null)
                     {
-                        @if (bookingService.GetBookingByShiftId(item.ShiftId) != null)
+                        @if (bookingService.GetBookingByShiftId(item.ShiftId).Result.Count == 0)
                         {
                             <a class="btn btn-primary" asp-page="/Book/CreateBook" asp-route-id="@item.ShiftId"><strong>Ledig vagt</strong></a>
                         }
+                        else
+                        {
+                            <p> Taget Vagt </p>
+                        }
+                        
 
                         @if (logInService.GetLoggedUser().Admin)
                         {
@@ -89,7 +94,7 @@
                             <a class="btn btn-danger" asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId"><strong>Slet vagt</strong></a>
                         }
                     }
-                    </div>
+                </div>
                 </td>
             </tr>
             }
