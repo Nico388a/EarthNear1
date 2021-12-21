@@ -20,15 +20,13 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Users/GetAllUsers">Medlemmer</a>
-                        </li>
+                        
                         @if (LogInService.GetLoggedUser() != null)
                         {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Users/GetAllUsers">Medlemmer</a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-page="/Book/GetAllBookings" 
                                    asp-page-handler="MyBookings" asp-route-sid="@LogInService.GetLoggedUser().UserId">
@@ -41,21 +39,12 @@
 
                             @if (LogInService.GetLoggedUser().Admin)
                             {
-                                @*<li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/Book/GetAllBookings">Vagter</a>
-                                </li>*@
+                               
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-page="/Admin/AdminHub">Admin Hub</a>
                                 </li>
-                                @*<li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-page="/Types/ShiftTypes/GetAllShiftTypes">Vagttyper</a>
-                </li>*@
                             }
                         }
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
 
                         <li class="ml-auto">
                             <div class="container-fluid">
@@ -69,10 +58,10 @@
                                             </a>
                                         </div>
                                     }
-                                    else
+                                    @*else
                                     {
                                         <a asp-page="/Users/Log/LogIn" class="float-right btn btn-primary" style="font-size: medium">Log In</a>
-                                    }
+                                    }*@
                                 }
                             </div>
                         </li>
