@@ -4,6 +4,8 @@
 @inject IShiftTypeService typeService
 @inject IShiftService shiftService
 @inject IBookingService bookingService
+@inject LogInService logInService
+@inject IUserService uService
 @model EarthNear1.Pages.Book.AssignBookingModel
 @{
     ViewData["Title"] = "AssignBooking";
@@ -45,20 +47,34 @@
                         @typeService.GetShiftTypeByIdAsync(@item.ShiftTypeId).Result.ShiftName
                     </td>
                     <td>
-                        <form method="post" enctype="multipart/form-data">
-                            <input hidden="hidden" asp-for="@item.ShiftId" />
-                            <div class="form-group">
-                                <select asp-for="@Model.Booking.UserId" asp-items="@Model.userList">
-                                    <option value="">--Tildel medlem--</option>
-                                </select>
-                                <span asp-validation-for="@Model.Booking.UserId" class="text-danger"></span>
-                            </div>
+                        @if(bookingService.GetBookingByShiftIdAsync(item.ShiftId).Result.Count == 0)
+                        {
+                            <form method="post" enctype="multipart/form-data">
+                                <input hidden="hidden" asp-for="@item.ShiftId"/>
+                                <div class="form-group">
+                                    <select asp-for="@Model.Booking.UserId" asp-items="@Model.userList">
+                                        <option value="">--Tildel medlem--</option>
+                                    </select>
+                                    <span asp-validation-for="@Model.Booking.UserId" class="text-danger"></span>
+                                </div>
 
-                            <div class="form-group">
-                                <input type="submit" asp-route-id="@item.ShiftId" value="Book" class="btn btn-primary" />
-                            </div>
-                        </form>       
-                     </td>
+                                <div class="form-group">
+                                    <input type="submit" asp-route-id="@item.ShiftId" value="Book" class="btn btn-primary"/>
+                                </div>
+                            </form>
+                        }
+                        else
+                        {
+                            foreach (var us in bookingService.GetBookingByShiftIdAsync(item.ShiftId).Result)
+                            {
+                                <p>
+                                    Taget af @uService.GetUserFromIdAsync(us.UserId).Result.Name
+                                    @uService.GetUserFromIdAsync(us.UserId).Result.AfterName
+                                </p>
+
+                            }
+                        }
+                    </td>
                 </tr>
             }
         }

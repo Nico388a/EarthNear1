@@ -17,9 +17,9 @@ namespace EarthNear1.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            return RedirectToPage("/Users/Log/LogIn");
         }
     }
 }
