@@ -6,6 +6,7 @@ using EarthNear1.Interfaces;
 using EarthNear1.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EarthNear1.Pages.Shifts
 {
@@ -16,9 +17,13 @@ namespace EarthNear1.Pages.Shifts
 
         private IShiftService shiftService;
 
-        public UpdateShiftModel(IShiftService sService)
+        public SelectList ShiftNames { get; set; }
+
+        public UpdateShiftModel(IShiftService sService, IShiftTypeService tService)
         {
             shiftService = sService;
+            Task<IEnumerable<ShiftType>> shiftTypes = tService.GetAllShiftTypesAsync();
+            ShiftNames = new SelectList(shiftTypes.Result, "ShiftTypeId", "ShiftName");
         }
         public async Task OnGet(int id)
         {

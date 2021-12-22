@@ -38,6 +38,9 @@
         <th>
             VagtTyper
         </th>
+        <th>
+            Vagtens status
+        </th>
     </tr>
     </thead>
     <tbody>
@@ -63,9 +66,26 @@
                 @typeService.GetShiftTypeByIdAsync(@item.ShiftTypeId).Result.ShiftName
             </td>
 
-            @*<td>
-                <b>@item.ShiftStatus</b>
-            </td>*@
+            <td>
+                @if (logInService.GetLoggedUser() != null)
+                {
+                    @if (bookingService.GetBookingByShiftIdAsync(item.ShiftId).Result.Count == 0)
+                    {
+                        <a class="btn btn-primary" asp-page="/Book/CreateBook" asp-route-id="@item.ShiftId"><strong>Ledig vagt</strong></a>
+                    }
+                    else
+                    {
+                        foreach (var us in bookingService.GetBookingByShiftIdAsync(item.ShiftId).Result)
+                        {
+                            <p>
+                                Taget af @uService.GetUserFromIdAsync(us.UserId).Result.Name
+                                @uService.GetUserFromIdAsync(us.UserId).Result.AfterName
+                            </p>
+
+                        }
+                    }
+                }
+            </td>
 
             <td>
                 <div style="margin: 50px">
@@ -73,24 +93,6 @@
 
                     @if (logInService.GetLoggedUser() != null)
                     {
-                        @if (bookingService.GetBookingByShiftIdAsync(item.ShiftId).Result.Count == 0)
-                        {
-                            <a class="btn btn-primary" asp-page="/Book/CreateBook" asp-route-id="@item.ShiftId"><strong>Ledig vagt</strong></a>
-                        }
-                        else
-                        {                            
-                            foreach (var us in bookingService.GetBookingByShiftIdAsync(item.ShiftId).Result)
-                            {
-                                
-                <p>
-                    Taget af @uService.GetUserFromIdAsync(us.UserId).Result.Name
-                    @uService.GetUserFromIdAsync(us.UserId).Result.AfterName
-                </p>
-                                
-                            }
-                        }
-
-
                         @if (logInService.GetLoggedUser().Admin)
                         {
                             <a class="btn btn-primary" asp-page="/Shifts/UpdateShift" asp-route-id="@item.ShiftId"><strong>opdater vagt</strong></a>
