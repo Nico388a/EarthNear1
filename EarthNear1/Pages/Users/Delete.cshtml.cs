@@ -30,7 +30,7 @@ namespace EarthNear1.Pages.Users
                 return Page();
             }
             await userService.DeleteUserAsync(User);
-            return RedirectToPage("GetAllUsers");
+            return RedirectToPage("Log/LogOut");
         }
     }
 }
