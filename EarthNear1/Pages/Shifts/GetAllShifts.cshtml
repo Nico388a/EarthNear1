@@ -71,7 +71,7 @@
                 {
                     @if (bookingService.GetBookingByShiftIdAsync(item.ShiftId).Result.Count == 0)
                     {
-                        <a class="btn btn-primary" asp-page="/Book/CreateBook" asp-route-id="@item.ShiftId"><strong>Ledig vagt</strong></a>
+                        <a class="btn btn-success" asp-page="/Book/CreateBook" asp-route-id="@item.ShiftId"><strong>Ledig vagt</strong></a>
                     }
                     else
                     {

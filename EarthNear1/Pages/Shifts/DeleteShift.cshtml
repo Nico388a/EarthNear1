@@ -6,31 +6,31 @@
 
 <div>
     <dl class="row">
-        <dt class="col-sm-4">
+
+        <dt class="col-sm-2">
             Dato
         </dt>
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Shift.Date)
         </dd>
-        <dt class="col-sm-4">
+        <dt class="col-sm-2">
             Vagt fra:
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Shift.TimeFrom)
         </dd>
-        <dt class="col-sm-4">
+        <dt class="col-sm-2">
             Vagt Til
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Shift.TimeTo)
         </dd>
-        <dt class="col-sm-4">
+        <dt class="col-sm-2">
             Vagttype
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Shift.ShiftTypeId)
         </dd>
-
     </dl>
     
     <form method="post">

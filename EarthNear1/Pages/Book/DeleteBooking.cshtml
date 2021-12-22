@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "DeleteBooking";
 }
-<h1 class="text-danger">Er du sikker på du vil slette denne booking</h1>
+<h1 class="text-danger">Er du sikker på at du vil slette din vagt</h1>
 <div>
     <dl class="row">
         <dt class="col-sm-2">
@@ -23,6 +23,6 @@
     <form method="post">
         <input type="hidden" asp-for="Booking.BookingId"/>
         <input type="submit" class="btn btn-danger" value="Slet"/>
-        <a asp-page="GetAllBookings" class="btn btn-primary"><strong>Tilabge til bookingliste</strong></a>
+        <a asp-page="GetAllBookings" class="btn btn-primary"><strong>Tilabge til vagtliste</strong></a>
     </form>
 </div>
