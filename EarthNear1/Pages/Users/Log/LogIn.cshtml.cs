@@ -39,7 +39,7 @@ namespace EarthNear1.Pages.Users.Log
                     if (user.Password == User.PasswordCheck)
                     {
                         logInService.UserLogIn(user);
-                        return RedirectToPage("/Index");
+                        return RedirectToPage("/Shifts/GetAllShifts");
                     }
                 }
                 AccessDenied = "Email/kodeord er ikke korrekt";
