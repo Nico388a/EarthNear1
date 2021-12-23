@@ -7,6 +7,7 @@
 @inject LogInService LogInService
 @{
     ViewData["Title"] = "Create user";
+    var photoPath = "~/images/Photos/" + (Model.User.UserImage ?? "noimage.jpg");
 }
 
 <h1>Create User</h1>
@@ -15,7 +16,7 @@
     @Model.InfoText
 </div>
 <form method="post" enctype="multipart/form-data">
-    <div class="row">
+    <div class="media border p-3">
         <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="@Model.User.UserImage" />
@@ -49,31 +50,32 @@
                 <input asp-for="@Model.User.Password2" class="form-control" />
                 <span asp-validation-for="@Model.User.Password2" class="text-danger"></span>
             </div>
+
+            @if (LogInService.GetLoggedUser() != null)
+            {
+                @if (LogInService.GetLoggedUser().Admin)
+                {
+                    <div class="form-group">
+                        <label asp-for="@Model.User.Admin" class="control-label"></label>
+                        <input type="radio" asp-for="@Model.User.Admin" value="true" />Ja
+                        <input type="radio" asp-for="@Model.User.Admin" value="false" />Nej
+                        <span asp-validation-for="@Model.User.Admin" class="text-danger"></span>
+                    </div>
+                }
+            }
         </div>
-        <div class="form-group">
-            <label asp-for="Photo" class="control-label"></label>
-            <div class="media-body">
-                <i class="fas fa-user-circle" style="font-size:60px"></i>
-                <div class="custom-file">
-                    <input asp-for="Photo" class="custom-file-input form-control" />
-                    <label class="custom-file-label">Indsæt photo</label>
-                </div>
+        <div class="col-sm-4 offset-3">
+            <div class="form-group">
+                <i class="fas fa-user-circle" style="font-size:180px"></i>
+            </div>
+            <div class="custom-file">
+                <input asp-for="Photo" class="custom-file-input form-control" />
+                <label class="custom-file-label">Indsæt profilbillede</label>
             </div>
         </div>
     </div>
-    @if (LogInService.GetLoggedUser() != null)
-    {
-        @if (LogInService.GetLoggedUser().Admin)
-        {
-            <div class="form-group">
-                <label asp-for="@Model.User.Admin" class="control-label"></label>
-                <input type="radio" asp-for="@Model.User.Admin" value="true" />Ja
-                <input type="radio" asp-for="@Model.User.Admin" value="false" />Nej
-                <span asp-validation-for="@Model.User.Admin" class="text-danger"></span>
-            </div>
-        }
-    }
-
+    
+    <br />
     <div class="form-group">
         <input type="submit" value="Create" class="btn btn-dark" />&nbsp; | &nbsp;
         <a asp-page="./GetAllUsers">Tilbage til medlemmer</a>

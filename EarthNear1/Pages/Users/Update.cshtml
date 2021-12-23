@@ -4,17 +4,17 @@
 @model EarthNear1.Pages.Users.UpdateModel
 @{
     ViewData["Title"] = "Update user";
-    var photo = "~/images/Photos" + (Model.User.UserImage ?? "noImages.jpg");
+    var photoPath = "~/images/Photos/" + (Model.User.UserImage ?? "noimage.jpg");
 }
 
-<h1>Update user</h1>
+<h1>Rediger Profil</h1>
 
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
+    <div class="media border p-3">
+        <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="@Model.User.UserId" />
-            <input type="hidden" asp-for="@Model.User.UserImage"/>
+            <input type="hidden" asp-for="@Model.User.UserImage" />
             <div class="form-group">
                 <label asp-for="@Model.User.Name" class="control-label"></label>
                 <input asp-for="@Model.User.Name" class="form-control" />
@@ -45,13 +45,7 @@
                 <input asp-for="@Model.User.Password2" class="form-control" />
                 <span asp-validation-for="@Model.User.Password2" class="text-danger"></span>
             </div>
-            <div class="form-group row">
-                <label asp-for="Photo"class="control-label" ></label>
-                <div class="custom-file">
-                    <input asp-for="Photo" class="custom-file-input form-control" />
-                    <label class="custom-file-label">Indsæt photo</label>
-                </div>
-            </div>
+
             @if (LogInService.GetLoggedUser().Admin)
             {
                 <div class="form-group">
@@ -61,21 +55,30 @@
                     <span asp-validation-for="@Model.User.Admin" class="text-danger"></span>
                 </div>
             }
-
+        </div>
+        <div class="col-sm-4 offset-4">
             <div class="form-group">
-                <input type="submit" value="Gem" class="btn btn-primary" />
+                <img class="rounded-circle" src="@photoPath" asp-append-version="true" width="306" height="236" />
             </div>
-            
-            @section scripts{ 
-            <script>
-                $(document).ready(function () {
-                    $('.custom-file-input').on("change", function () {
-                        var fileName = $(this).val().split("\\").pop();
-                        $(this).next('.custom-file-label').html(fileName);
-                    });
-                });
-            </script>
-            }
-        </form>
+            <div class="custom-file">
+                <input asp-for="Photo" class="custom-file-input form-control" />
+                <label class="custom-file-label">Skift profilbillede</label>
+            </div>
+        </div>
     </div>
-</div>
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Gem" class="btn btn-primary" />
+    </div>
+
+    @section scripts{
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+        </script>
+    }
+</form>
