@@ -7,7 +7,7 @@
 @inject LogInService LogInService
 @{
     ViewData["Title"] = "Create user";
-    var photoPath = "~/images/Photos/" + (Model.User.UserImage ?? "noimage.jpg");
+    var userImage = "~/images/Photos/" +  "noimage.jpg";
 }
 
 <h1>Create User</h1>
@@ -65,9 +65,10 @@
             }
         </div>
         <div class="col-sm-4 offset-3">
-            <div class="form-group">
-                <i class="fas fa-user-circle" style="font-size:180px"></i>
-            </div>
+            @*<div class="form-group">
+
+            </div>*@
+            <img class="rounded-circle" src="@userImage" asp-append-version="true" width="306" height="236" /><br />
             <div class="custom-file">
                 <input asp-for="Photo" class="custom-file-input form-control" />
                 <label class="custom-file-label">Indsæt profilbillede</label>
