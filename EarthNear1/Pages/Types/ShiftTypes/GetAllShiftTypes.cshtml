@@ -7,16 +7,16 @@
 }
 
 <h1>Vagttyper</h1>
-
 <p>
-        @if (logInService.GetLoggedUser() != null)
+
+    @if (logInService.GetLoggedUser() != null)
+    {
+        @if (logInService.GetLoggedUser().Admin)
         {
-            @if (logInService.GetLoggedUser().Admin)
-            {
-                <a asp-page="/Types/ShiftTypes/CreateShiftType" class="btn btn-primary"><strong>Ny vagttype+</strong></a>
-            }
+            <a asp-page="/Types/ShiftTypes/CreateShiftType" class="btn btn-primary"><strong>Ny vagttype+</strong></a>
         }
-    </p>
+    }
+</p>
 
 <table class="table">
     <thead>

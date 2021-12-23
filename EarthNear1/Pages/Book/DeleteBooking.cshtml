@@ -1,4 +1,9 @@
 ﻿@page
+@inject IShiftService sService
+@inject IBookingService bService
+@inject IShiftTypeService typeService
+@inject IUserService uService
+@using EarthNear1.Interfaces
 @model EarthNear1.Pages.Book.DeleteBookingModel
 @{
     ViewData["Title"] = "DeleteBooking";
@@ -10,15 +15,37 @@
             vagt
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model=> model.Booking.ShiftId)
+            @Html.DisplayName(typeService.GetShiftTypeByIdAsync(sService.GetShiftByIdAsync(Model.Booking.ShiftId).Result.ShiftTypeId).Result.ShiftName)
         </dd>
-        
+
         <dt class="col-sm-2">
             Medlem
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model=> model.Booking.UserId)
+            @Html.DisplayName(uService.GetUserFromIdAsync(Model.Booking.UserId).Result.Name) @Html.DisplayName(uService.GetUserFromIdAsync(Model.Booking.UserId).Result.AfterName)
         </dd>
+
+        <dt class="col-sm-2">
+            Dato
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayName(sService.GetShiftByIdAsync(Model.Booking.ShiftId).Result.Date.ToString("D"))
+        </dd>
+
+        <dt class="col-sm-2">
+            Tidspunkt fra
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayName(sService.GetShiftByIdAsync(Model.Booking.ShiftId).Result.TimeFrom.Hours.ToString("00")):@Html.DisplayName(sService.GetShiftByIdAsync(Model.Booking.ShiftId).Result.TimeFrom.Minutes.ToString("00"))
+        </dd>
+
+        <dt class="col-sm-2">
+            Tidspunkt til
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayName(sService.GetShiftByIdAsync(Model.Booking.ShiftId).Result.TimeTo.Hours.ToString("00")):@Html.DisplayName(sService.GetShiftByIdAsync(Model.Booking.ShiftId).Result.TimeTo.Minutes.ToString("00"))
+        </dd>
+
     </dl>
     <form method="post">
         <input type="hidden" asp-for="Booking.BookingId"/>
