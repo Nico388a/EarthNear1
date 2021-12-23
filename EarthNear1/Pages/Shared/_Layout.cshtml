@@ -54,6 +54,7 @@
                                         <p class="float-right" style="font-size: medium">&nbsp; | &nbsp;</p>
                                         <div class="float-right">
                                             <a asp-page="/Users/Profile" asp-route-id="@LogInService.GetLoggedUser().UserId" class="float-right" style="font-size: medium">
+                                                <img src="~/images/Photos/@LogInService.GetLoggedUser().UserImage" width="35" height="35" class="rounded-circle"/>
                                                 @LogInService.GetLoggedUser().Name
                                             </a>
                                         </div>
