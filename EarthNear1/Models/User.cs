@@ -17,7 +17,7 @@ namespace EarthNear1.Models
         public string AfterName { get; set; }
         [Required(ErrorMessage = "Angiv telefonnummer"), DisplayName("Telefonnummer")]
         public string PhoneNumber { get; set; }
-        [Required(ErrorMessage = "Udfyld mailaddresse"), DisplayName("Mailaddresse")]
+        [Required(ErrorMessage = "Udfyld mailaddresse"), DisplayName("Mailaddresse"), EmailAddress]
         public string Email { get; set; }
         [DisplayName("Kodeord")]
         public string Password { get; set; }
