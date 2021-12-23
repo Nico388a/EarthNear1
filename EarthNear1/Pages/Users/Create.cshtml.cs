@@ -57,7 +57,10 @@ namespace EarthNear1.Pages.Users
             {
                 return Page();
             }
-
+            if (Photo == null)
+            {
+                user.UserImage = "noimage.jpg";
+            }
             try
             {
                 if (Photo != null)
