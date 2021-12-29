@@ -19,27 +19,33 @@ namespace EarthNear1.Pages.Types.ShiftUsers
         public ShiftUser shiftUser { get; set; }
         private IShiftUserService sUserService;
         private IShiftTypeService sTypeService;
-        private LogInService logService;
+        private IUserService userService;
         public SelectList typesList { get; set; }
         public IEnumerable<ShiftType> shifttypes { get; set; } 
+        public List<ShiftUser> shiftUsers { get; set; }
         [BindProperty]
         public User User { get; set; }
         [BindProperty]
         public List<int> AreChecked { get; set; }
-        public CreateShiftUsersModel(IShiftUserService shiftuserService, IShiftTypeService shifttypeService, LogInService lService)
+        public CreateShiftUsersModel(IShiftUserService shiftuserService, IShiftTypeService shifttypeService, IUserService uService)
         {
             shiftUser = new ShiftUser();
             sUserService = shiftuserService;
             sTypeService = shifttypeService;
-            logService = lService;
+            userService = uService;
             shifttypes = sTypeService.GetAllShiftTypesAsync().Result;
             //typesList = new SelectList(shifttypes.Result, "ShiftTypeId", "ShiftName");
         }
         public IActionResult OnGetAsync(int id)
         {
-            User = logService.GetLoggedUser();
+            User = userService.GetUserFromIdAsync(id).Result;
             shiftUser.UserId = User.UserId;
-            sUserService.DeleteShiftUserAsync(shiftUser);
+            shiftUsers = sUserService.GetShiftUserByUserId(User.UserId).Result;
+            foreach (var shift in shiftUsers)
+            {
+                sUserService.DeleteShiftUserAsync(shift);
+            }
+
             //shiftUser.ShiftTypeId = id;
             return Page();
         }
@@ -47,8 +53,9 @@ namespace EarthNear1.Pages.Types.ShiftUsers
         public List<string> Users => _users;
         public async Task<IActionResult> OnPostAsync()
         {
+           
             
-            foreach(int v in AreChecked)
+            foreach (int v in AreChecked)
             {
                 shiftUser.ShiftTypeId = v;
                 //if (shiftUser != null)
