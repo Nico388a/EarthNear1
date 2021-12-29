@@ -81,11 +81,11 @@
         <input type="submit" value="Create" class="btn btn-dark" />&nbsp; | &nbsp;
         @if (LogInService.GetLoggedUser() != null)
         {
-            <a asp-page="./GetAllUsers">Aflys</a>
+            <a asp-page="./GetAllUsers" class="btn btn-primary">Aflys</a>
         }
         else
         {
-            <a asp-page="./Log/LogIn">Aflys</a>
+            <a asp-page="./Log/LogIn" class="btn btn-primary">Aflys</a>
         }
     </div>
 
