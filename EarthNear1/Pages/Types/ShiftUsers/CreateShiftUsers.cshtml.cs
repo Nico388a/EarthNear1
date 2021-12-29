@@ -39,6 +39,7 @@ namespace EarthNear1.Pages.Types.ShiftUsers
         {
             User = logService.GetLoggedUser();
             shiftUser.UserId = User.UserId;
+            sUserService.DeleteShiftUserAsync(shiftUser);
             //shiftUser.ShiftTypeId = id;
             return Page();
         }
@@ -50,14 +51,14 @@ namespace EarthNear1.Pages.Types.ShiftUsers
             foreach(int v in AreChecked)
             {
                 shiftUser.ShiftTypeId = v;
-                if (shiftUser != null)
-                {
-                    await sUserService.DeleteShiftUserAsync(shiftUser);
-                }
+                //if (shiftUser != null)
+                //{
+                //    await sUserService.DeleteShiftUserAsync(shiftUser);
+                //}
                 await sUserService.AddShiftUserAsync(shiftUser);
             }
             //await sUserService.AddShiftUserAsync(shiftUser);
-            return RedirectToPage("GetAllShiftUsers");
+            return RedirectToPage("/Users/GetAllUsers");
         }
     }
 }

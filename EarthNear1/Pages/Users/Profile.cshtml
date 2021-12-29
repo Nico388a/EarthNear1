@@ -62,7 +62,7 @@
         </tr>
         <tr>
             <th>
-                Jobtype
+                Jobtyper
             </th>
             <td>
                 @foreach (var type in theUserType.GetUserTypes(Model.User.UserId).Result)
@@ -77,7 +77,7 @@
 
 <form method="post" asp-page-handler="CreateShiftUser">
     <p>
-        <button class="btn btn-primary">Tilrette arbejdserfaringer</button>
+        <button class="btn btn-primary">Tilret jobtyper</button>
     </p>
     <input type="hidden" name="id" value="@Model.User.UserId" />
 </form>
