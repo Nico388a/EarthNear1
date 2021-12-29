@@ -87,14 +87,14 @@
                     </td>
 
                     <td style="margin: 60px">
-                    @if (logInService.GetLoggedUser() != null)
+                        @if (logInService.GetLoggedUser() != null)
+                        {
+                            @if (logInService.GetLoggedUser().Admin)
                             {
-                                @if (logInService.GetLoggedUser().Admin)
-                                {
-                                    <a class="btn btn-primary" asp-page="/Shifts/UpdateShift" asp-route-id="@item.ShiftId"><strong>opdater vagt</strong></a>
-                                    <a class="btn btn-danger" asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId"><strong>Slet vagt</strong></a>
-                                }
+                                <a class="btn btn-primary" asp-page="/Shifts/UpdateShift" asp-route-id="@item.ShiftId"><strong>opdater vagt</strong></a>
+                                <a class="btn btn-danger" asp-page="/Shifts/DeleteShift" asp-route-id="@item.ShiftId"><strong>Slet vagt</strong></a>
                             }
+                        }
                     </td>
                 </tr>
             }
