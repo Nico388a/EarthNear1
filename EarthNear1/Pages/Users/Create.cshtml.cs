@@ -90,7 +90,7 @@ namespace EarthNear1.Pages.Users
                 RndPass = ChangePassword(8);
                 return Page();
             }
-            return RedirectToPage("GetAllUsers");
+            return RedirectToPage("./Log/LogIn");
         }
 
         private string ProcessUploadedFile()
