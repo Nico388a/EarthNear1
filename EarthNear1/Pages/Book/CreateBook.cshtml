@@ -1,28 +1,67 @@
 ﻿@page
+@inject IUserService uService
+@inject IShiftService sService
+@inject IShiftTypeService typeService
+@using EarthNear1.Interfaces
+@using Microsoft.AspNetCore.Mvc.Rendering
 @model EarthNear1.Pages.Book.CreateBookModel
 @{
     ViewData["Title"] = "CreateBook";
 }
 <h1>Book denne vagt</h1>
-<div class="row">
-    <div class="col-sm-4">
-        <form method="post">
-            <div class="form-group">
+<form method="post">
+            <div hidden="hidden" class="form-group">
                 <label asp-for="@Model.Booking.UserId" class="control-label"></label>
                 <input readonly="readonly" asp-for="@Model.Booking.UserId" class="form-control"/>
                 <span asp-validation-for="@Model.Booking.UserId" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            <div hidden="hidden" class="form-group">
                 <label asp-for="@Model.Booking.ShiftId" class="control-label"></label>
                 <input readonly="readonly" asp-for="@Model.Booking.ShiftId" class="form-control"/>
                 <span asp-validation-for="@Model.Booking.ShiftId" class="text-danger"></span>
             </div>
-            
+            <div>
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        vagt
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayName(typeService.GetShiftTypeByIdAsync(sService.GetShiftByIdAsync(Model.Booking.ShiftId).Result.ShiftTypeId).Result.ShiftName)
+                    </dd>
+
+                    <dt class="col-sm-2">
+                        Medlem
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayName(uService.GetUserFromIdAsync(Model.Booking.UserId).Result.Name) @Html.DisplayName(uService.GetUserFromIdAsync(Model.Booking.UserId).Result.AfterName)
+                    </dd>
+
+                    <dt class="col-sm-2">
+                        Dato
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayName(sService.GetShiftByIdAsync(Model.Booking.ShiftId).Result.Date.ToString("D"))
+                    </dd>
+
+                    <dt class="col-sm-2">
+                        Tidspunkt fra
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayName(sService.GetShiftByIdAsync(Model.Booking.ShiftId).Result.TimeFrom.Hours.ToString("00")):@Html.DisplayName(sService.GetShiftByIdAsync(Model.Booking.ShiftId).Result.TimeFrom.Minutes.ToString("00"))
+                    </dd>
+
+                    <dt class="col-sm-2">
+                        Tidspunkt til
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayName(sService.GetShiftByIdAsync(Model.Booking.ShiftId).Result.TimeTo.Hours.ToString("00")):@Html.DisplayName(sService.GetShiftByIdAsync(Model.Booking.ShiftId).Result.TimeTo.Minutes.ToString("00"))
+                    </dd>
+
+                </dl>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Book" class="btn btn-primary" />
                 <a asp-page="/Shifts/GetAllShifts" class="btn btn-primary">Tilabge til vagtliste</a>
             </div>
         </form>
-    </div>
-</div>
