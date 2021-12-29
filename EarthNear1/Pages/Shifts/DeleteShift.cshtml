@@ -6,38 +6,35 @@
     ViewData["Title"] = "DeleteShift";
 }
 <h1 class="text-danger">Er du sikker på du vil slette denne vagt</h1>
-<div>
-    <dl class="row">
+<dl class="row">
 
-        <dt class="col-sm-2">
-            Dato
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayName(Model.Shift.Date.ToString("d"))
-        </dd>
-        <dt class="col-sm-2">
-            Vagt fra:
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayName(Model.Shift.TimeFrom.Hours.ToString("00")):@Html.DisplayName(Model.Shift.TimeFrom.Minutes.ToString("00"))
-        </dd>
-        <dt class="col-sm-2">
-            Vagt Til
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayName(Model.Shift.TimeTo.Hours.ToString("00")):@Html.DisplayName(Model.Shift.TimeTo.Minutes.ToString("00"))
-        </dd>
-        <dt class="col-sm-2">
-            Vagttype
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayName(typeService.GetShiftTypeByIdAsync(Model.Shift.ShiftTypeId).Result.ShiftName)
-        </dd>
-    </dl>
-    
-    <form method="post">
-        <input type="hidden" asp-for="Shift.ShiftId"/>
-        <input type="submit" value="Slet" class="btn btn-danger"/>
-        <a asp-page="GetAllShifts" class="btn btn-primary"><strong>Tilbage til vagtliste</strong></a>
-    </form>
-</div>
+    <dt class="col-sm-2">
+        Dato
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayName(Model.Shift.Date.ToString("d"))
+    </dd>
+    <dt class="col-sm-2">
+        Vagt fra:
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayName(Model.Shift.TimeFrom.Hours.ToString("00")):@Html.DisplayName(Model.Shift.TimeFrom.Minutes.ToString("00"))
+    </dd>
+    <dt class="col-sm-2">
+        Vagt Til
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayName(Model.Shift.TimeTo.Hours.ToString("00")):@Html.DisplayName(Model.Shift.TimeTo.Minutes.ToString("00"))
+    </dd>
+    <dt class="col-sm-2">
+        Vagttype
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayName(typeService.GetShiftTypeByIdAsync(Model.Shift.ShiftTypeId).Result.ShiftName)
+    </dd>
+</dl>
+<form method="post">
+    <input type="hidden" asp-for="Shift.ShiftId"/>
+    <input type="submit" value="Slet" class="btn btn-danger"/>
+    <a asp-page="GetAllShifts" class="btn btn-primary"><strong>Tilbage til vagtliste</strong></a>
+</form>

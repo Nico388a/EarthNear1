@@ -4,39 +4,42 @@
     ViewData["Title"] = "Slet arbejder";
 }
 
-<h1>Slet arbejder</h1>
+<h1>Slet profil</h1>
 
 <form method="post">
     <hr />
     <dl class="row">
-        <dd>
-            <label hidden="hidden" asp-for="@Model.User.UserId" class="control-label"></label>
-            <input type="hidden" asp-for="@Model.User.UserId" />
+        <dt class="col-sm-2">
+            Navn:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Name)
         </dd>
-        <dd class="form-group">
-            <label asp-for="@Model.User.Name" class="control-label"></label>
-            <input asp-for="@Model.User.Name" readonly="readonly" class="form-control" />
+        <dt class="col-sm-2">
+            Efternavn:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.AfterName)
         </dd>
-        <dd class="form-group">
-            <label asp-for="@Model.User.AfterName" class="control-label"></label>
-            <input asp-for="@Model.User.AfterName" readonly="readonly" class="form-control" />
+        <dt class="col-sm-2">
+            tlf:
+        </dt>
+        
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.PhoneNumber)
         </dd>
-        <dd class="form-group">
-            <label asp-for="@Model.User.PhoneNumber" class="control-label"></label>
-            <input asp-for="@Model.User.PhoneNumber" readonly="readonly" class="form-control" />
+        
+        <dt class="col-sm-2">
+            Email:
+        </dt>
+        
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Email)
         </dd>
+        <dt 
+            class="col-sm-2">Password:</dt>
         <dd class="form-group">
-            <label asp-for="@Model.User.Email" class="control-label"></label>
-            <input asp-for="@Model.User.Email" readonly="readonly" class="form-control" />
-        </dd>
-        <dd class="form-group">
-            <label asp-for="@Model.User.Password" class="control-label"></label>
-            <input asp-for="@Model.User.Password" readonly="readonly" class="form-control" />
-        </dd>
-        <dd class="form-group">
-            <label asp-for="@Model.User.Password2" class="control-label"></label>
-            <input asp-for="@Model.User.Password2" class="form-control" />
-            <span asp-validation-for="@Model.User.Password2" class="text-danger"></span>
+            @Html.DisplayFor(model=>model.User.Password)
         </dd>
     </dl>
 
