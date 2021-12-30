@@ -66,7 +66,7 @@
                     <td>
                         @foreach(var type in theUserType.GetUserTypes(item.UserId).Result)
                     {
-                        <var>@theShiftType.GetShiftTypeByIdAsync(type.ShiftTypeId).Result.ShiftName,</var>
+                        @theShiftType.GetShiftTypeByIdAsync(type.ShiftTypeId).Result.ShiftName<br />
 
                         }    
                     </td>
