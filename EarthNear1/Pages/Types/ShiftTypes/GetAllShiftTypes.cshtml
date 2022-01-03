@@ -39,53 +39,6 @@
                             <a asp-page="/Types/ShiftTypes/DeleteShiftType" asp-route-id="@item.ShiftTypeId" class="btn btn-danger"><strong>Slet type</strong></a>
                         </div>
                     </td>
-
-                    <td>
-                        <div>
-                            <!--knap til slet-->
-                            <button type="button" class="btn-danger" data-toggle="modal" data-target="#exampleModal">
-                               Modal Slet type
-                            </button>
-
-                            <!--Koden der viser modalboksen-->
-                            
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Er du sikker på at slette denne type</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    @*<span aria-hidden="true">&times;</span>*@
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div>
-                                                    <dl class="row">
-                                                        <dt class="col-sm-2">
-                                                            Id
-                                                        </dt>
-                                                        <dd class="col-sm-10">
-                                                            @Html.DisplayFor(model => model.ShiftType.ShiftTypeId)
-                                                        </dd>
-                                                        <dt class="col-sm-2">
-                                                            Vagttypenavn
-                                                        </dt>
-                                                        <dd class="col-sm-10">
-                                                            @Html.DisplayFor(model => model.ShiftType.ShiftName)
-                                                        </dd>
-                                                    </dl>
-                                                    <form method="post">
-                                                        <input type="hidden" asp-for="ShiftType.ShiftTypeId"/>
-                                                        <input type="submit" value="Slet" class="btn btn-danger"/>
-                                                        <a asp-page="GetAllShiftTypes" class="btn btn-primary">Tilbage</a>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                    </td>
                 </tr>
             }
         }

@@ -25,10 +25,9 @@ namespace EarthNear1.Pages.Types.ShiftTypes
             this.shiftTypeService = shiftTypeService;
             this.shiftUserService = shiftUserService;
         }
-        public async Task OnGetAsync(int id)
+        public async Task OnGetAsync()
         {
             ShiftTypes = await shiftTypeService.GetAllShiftTypesAsync();
-            ShiftType = await shiftTypeService.GetShiftTypeByIdAsync(id);
         }
 
         public async Task<IActionResult> OnPostAsync()
