@@ -81,11 +81,11 @@
         <input type="submit" value="Opret" class="btn btn-dark" />&nbsp; | &nbsp;
         @if (LogInService.GetLoggedUser() != null)
         {
-            <a asp-page="./GetAllUsers" class="btn btn-primary">Aflys</a>
+            <a asp-page="./GetAllUsers" class="btn btn-primary">Gå tilbage</a>
         }
         else
         {
-            <a asp-page="./Log/LogIn" class="btn btn-primary">Aflys</a>
+            <a asp-page="./Log/LogIn" class="btn btn-primary">Gå tilbage</a>
         }
     </div>
 
