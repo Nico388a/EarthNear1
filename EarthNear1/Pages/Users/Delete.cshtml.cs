@@ -18,17 +18,12 @@ namespace EarthNear1.Pages.Users
         {
             userService = service;
         }
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task OnGetAsync(int id)
         {
             User = await userService.GetUserFromIdAsync(id);
-            return Page();
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
             await userService.DeleteUserAsync(User);
             return RedirectToPage("Log/LogOut");
         }

@@ -6,8 +6,7 @@
 
 <h1>Slet profil</h1>
 
-<form method="post">
-    <hr />
+<div>
     <dl class="row">
         <dt class="col-sm-2">
             Navn:
@@ -42,7 +41,10 @@
             @Html.DisplayFor(model=>model.User.Password)
         </dd>
     </dl>
-
-    <input type="submit" value="Slet" class="btn btn-danger" />
-    <a asp-page="./GetAllUsers">Tilbage til medlemslisten</a>
-</form>
+    <form method="post">
+        <input type="hidden" asp-for="User.UserId"/>
+        <input type="submit" value="Slet" class="btn btn-danger" />
+        <a asp-page="./GetAllUsers" class="btn btn-primary"><strong>Tilbage til medlemslisten</strong></a>
+    </form>
+    
+</div>
