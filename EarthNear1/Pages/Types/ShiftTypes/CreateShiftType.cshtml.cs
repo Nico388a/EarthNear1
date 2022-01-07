@@ -35,6 +35,5 @@ namespace EarthNear1.Pages.Types.ShiftTypes
             await shiftTypeService.AddShiftTypeAsync(shiftType);
             return RedirectToPage("GetAllShiftTypes");
         }
-
     }
 }
