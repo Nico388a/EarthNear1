@@ -20,7 +20,6 @@ namespace EarthNear1.Pages.Types.ShiftUsers
         private IShiftUserService sUserService;
         private IShiftTypeService sTypeService;
         private IUserService userService;
-        public SelectList typesList { get; set; }
         public IEnumerable<ShiftType> shifttypes { get; set; } 
         public List<ShiftUser> shiftUsers { get; set; }
         [BindProperty]
