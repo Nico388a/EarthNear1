@@ -18,12 +18,10 @@ namespace EarthNear1.Pages.Types.ShiftTypes
         public ShiftType ShiftType { get; set; }
 
         private IShiftTypeService shiftTypeService;
-        private IShiftUserService shiftUserService;
 
-        public GetAllShiftTypesModel(IShiftTypeService shiftTypeService, IShiftUserService shiftUserService)
+        public GetAllShiftTypesModel(IShiftTypeService shiftTypeService)
         {
             this.shiftTypeService = shiftTypeService;
-            this.shiftUserService = shiftUserService;
         }
         public async Task OnGetAsync()
         {

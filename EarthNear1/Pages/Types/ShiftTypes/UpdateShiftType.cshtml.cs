@@ -17,7 +17,7 @@ namespace EarthNear1.Pages.Types.ShiftTypes
 
         public UpdateShiftTypeModel(IShiftTypeService shiftTypeService)
         {
-            this.ShiftTypeService = shiftTypeService;
+            ShiftTypeService = shiftTypeService;
         }
         public async Task OnGetAsync(int id)
         {
