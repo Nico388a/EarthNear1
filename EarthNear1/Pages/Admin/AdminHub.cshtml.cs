@@ -9,9 +9,6 @@ namespace EarthNear1.Pages.Admin
 {
     public class AdminHubModel : PageModel
     {
-        public void OnGet()
-        {
-        }
         public IActionResult OnPostCreateUser()
         {
             return RedirectToPage("/Users/Create");
