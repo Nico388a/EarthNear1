@@ -38,7 +38,6 @@
             <div class="form-group">
                 <label asp-for="@Model.User.Password" class="control-label"></label>
                 <input asp-for="@Model.User.Password" class="form-control" />
-                @*<span asp-validation-for="@Model.User.Password" class="text-danger"></span>*@
             </div>
             <div class="form-group">
                 <label asp-for="@Model.User.Password2" class="control-label"></label>
@@ -57,9 +56,6 @@
             }
         </div>
         <div class="col-sm-4 offset-4">
-            @*<div class="form-group">
-
-            </div>*@
             <img class="rounded-circle" src="@photoPath" asp-append-version="true" width="306" height="236" /><br />
             <div class="custom-file">
                 <input asp-for="Photo" class="custom-file-input form-control" />

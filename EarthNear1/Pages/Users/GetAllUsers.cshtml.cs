@@ -24,8 +24,6 @@ namespace EarthNear1.Pages.Users
         }
         public async Task OnGetAsync(int id)
         {
-            //shiftUsers = new List<ShiftUser>();
-            
             if (!String.IsNullOrEmpty(FilterCriteria))
             {
                 Users = await userService.GetUserByNameAsync(FilterCriteria);
