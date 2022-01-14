@@ -28,7 +28,7 @@ namespace EarthNear1.Pages.Book
         public async Task<IActionResult> OnPost()
         {
             await bookingService.DeleteBookingAsync(Booking);
-            return RedirectToPage("GetAllBookings");
+            return RedirectToPage("/Shifts/GetAllShifts");
         }
     }
 }

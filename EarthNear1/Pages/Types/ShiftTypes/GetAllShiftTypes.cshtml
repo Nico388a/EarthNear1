@@ -34,10 +34,10 @@
                 <tr>
                     <td>
                         @item.ShiftName
-                        <div style="margin: 50px">
-                            <a asp-page="/Types/ShiftTypes/UpdateShiftType" asp-route-id="@item.ShiftTypeId" class="btn btn-primary"><strong>opdater</strong></a>
-                            <a asp-page="/Types/ShiftTypes/DeleteShiftType" asp-route-id="@item.ShiftTypeId" class="btn btn-danger"><strong>Slet type</strong></a>
-                        </div>
+                    </td>
+                    <td>
+                        <a asp-page="/Types/ShiftTypes/UpdateShiftType" asp-route-id="@item.ShiftTypeId" class="btn btn-primary"><strong>opdater</strong></a>
+                        <a asp-page="/Types/ShiftTypes/DeleteShiftType" asp-route-id="@item.ShiftTypeId" class="btn btn-danger"><strong>Slet type</strong></a>
                     </td>
                 </tr>
             }
