@@ -65,7 +65,7 @@ namespace EarthNear1.Pages.Users
             }
             catch (ExistsException e)
             {
-                InfoText = $"Noget gik gik galt! {e.Message}";
+                InfoText = $"Noget gik galt! {e.Message}";
                 return Page();
             }
             catch (Exception ex)
