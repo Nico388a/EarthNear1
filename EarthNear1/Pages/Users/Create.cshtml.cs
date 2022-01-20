@@ -70,7 +70,7 @@ namespace EarthNear1.Pages.Users
             }
             catch (Exception ex)
             {
-                InfoText = $"Noget gik gik galt! {ex.Message}";
+                InfoText = $"Noget gik galt! {ex.Message}";
                 return Page();
             }
             return RedirectToPage("./Log/LogIn");
