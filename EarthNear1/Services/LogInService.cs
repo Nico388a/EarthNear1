@@ -22,5 +22,6 @@ namespace EarthNear1.Services
         {
             return _loggedInUser;
         }
+        
     }
 }
